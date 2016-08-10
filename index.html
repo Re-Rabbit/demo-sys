@@ -1,0 +1,24 @@
+{# -*- mode: web -*- #}
+
+{% import "tpls/macros.html" as $ %}
+
+{% block content %}
+  <main>
+  </main>
+{% endblock %}
+
+
+{% block styles %}
+  {{ $.css("index") }}
+{% endblock %}
+
+
+{% block scripts %}
+  {{ $.js("/vendor.dll") }}
+  {{ $.js("/commons") }}
+  {{ $.js("index") }}
+{% endblock %}
+
+
+{% extends "tpls/page.html" %}
+
