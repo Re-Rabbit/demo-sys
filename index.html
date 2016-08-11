@@ -3,6 +3,48 @@
 {% import "tpls/macros.html" as $ %}
 
 {% block content %}
+<div class="temp">
+    <div class="tpl" style="display:none">
+        <div id="tpl_identation" class="identation">  </div>
+        <div id="tpl_tree-node" class="tree-node">
+            <div class="tree-node--line">
+                <div class="tree-node--info">
+                    <div class="icon-collapase collpase"></div>
+                    <div class="icon"></div>
+                    <div class="node-name"></div>
+                </div>
+                <div class="tree-node--editor">
+                    <div class="add-sub">
+                        <div class="icon-add"></div>
+                        add-sub
+                    </div>
+                    <div class="remove">
+                        <div class="icon-remove"></div>
+                        remove
+                    </div>
+                    <div class="edit">
+                        <div class="icon-edit"></div>
+                        edit
+                    </div>
+                </div>
+            </div>
+            <div class="tree-node--sub-nodes">
+            </div>
+        </div>
+    </div>
+    <div class="tree-view">
+        <div class="tree-view--line">
+            <div class="tree-view--info">shangpinleibie</div>
+            <div class="tree-view--editor">
+                <div class="add-sub">
+                    <div class="icon-add"></div>
+                    add-sub
+                </div>
+            </div>
+        </div>
+        <div class="tree-view--nodes"></div>
+    </div>
+</div>
 <div class="main">
   {% include "pages/_top.html" %}
 
@@ -51,6 +93,64 @@
   {{ $.js("/vendor.dll") }}
   {{ $.js("/commons") }}
   {{ $.js("index") }}
+
+<script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
+<script>
+ function create_tree_node(n, identation){
+     var { name, children } = n
+     var tree_node = $('#tpl_tree-node').clone().removeAttr('id')
+
+     tree_node.find('.node-name').text(name)
+     var info = tree_node.find('.tree-node--info')
+     var iden = $('#tpl_identation')
+     for(var i=0; i<identation; i++){
+         var iden_c = iden.clone().removeAttr('id')
+         iden_c.prependTo(info)
+     }
+
+     var tree_node_sub_nodes = tree_node.find('.tree-node--sub-nodes')
+     children.forEach(i=>create_tree_node(i, identation+1).appendTo(tree_node_sub_nodes))
+
+
+     tree_node.find('.tree-node--info').click(()=>{
+         console.log(tree_node.toggleClass('active'))
+         return ture
+     })
+     if(children.length == 0){
+         tree_node.find('.colloase').hide()
+     }
+
+     return tree_node
+ }
+ var node_root = [
+     { name: 'zhixiang',
+       children: [
+           { name: 'biaozhun',
+             children: [
+                 { name: 'dingzhi',
+                   children: [] },
+             ] },
+           { name: 'yiside',
+             children: [
+                 { name: 'dingzhi',
+                   children: [] },
+             ] },
+           { name: 'dingzhi',
+             children: [
+                 { name: 'dingzhi',
+                   children: [] },
+             ] },
+
+       ] },
+ ]
+
+ function render_tree_nodes(node_root, target){
+     node_root.forEach(i=>create_tree_node(i, 0).appendTo(target))
+ }
+
+ $(()=>render_tree_nodes(node_root, $('.tree-view--nodes')))
+</script>
+
 {% endblock %}
 
 
