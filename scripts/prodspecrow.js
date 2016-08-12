@@ -1,22 +1,29 @@
 import $ from 'jquery'
 import LabelField, { LabelFieldTpl } from './labelfield.js'
 
-export const ProdSpecRowTpl = _ => `
-  <div class="js-prodspecrow">
-    <div>
-      <input name="specname" type="text" class="js-prodspecrow-name" />
+export const ProdSpecRowTpl = name => `
+  <div class="js-prodspecrow row">
+    <div class="grid width--2">
+      <div class="spec-namefield-container">
+        <input name="specname" type="text" class="spce-namefield js-prodspecrow-name" value="${name || '规格'}" />
+      </div>
     </div>
-
-    <div class="js-prodspecrow-labelfield js-labelfield">
-      <input type="text" name="labelfield" class="js-labelfield-input" />
-      <div class="js-labelfield-container"></div>
-      <div class="js-labelfield-autocomplete">
-        <div class="js-labelfield-creator"></div>
-        <ul class="js-labelfield-memolist"></ul>
+    <div class="grid width--9">
+      <div class="spce-labelfield js-prodspecrow-labelfield js-labelfield">
+        <div class="spec-labelfield-labels js-labelfield-container"></div>
+        <input type="text" name="labelfield" class="spce-labelfield-field js-labelfield-input" />
+        <div class="js-labelfield-autocomplete">
+          <div class="js-labelfield-creator"></div>
+          <ul class="labelfield-memolist js-labelfield-memolist"></ul>
+        </div>
       </div>
     </div>
 
-    <div class="js-prodspecrow-close">X</div>
+    <div class="grid width--1">
+      <div class="spec-closed js-prodspecrow-close">
+        <span class="ic ion-ios-close-outline"></span>
+      </div>
+    </div>
   </div>
 `
 
@@ -34,8 +41,8 @@ export default class ProdSpecRow {
   }
 
   init() {
-    let { $el, datastate } = this
-    $el.append(ProdSpecRowTpl())
+    let { $el, datastate, name } = this
+    $el.append(ProdSpecRowTpl(name))
 
     this.lf = LabelField.of({ $el: $el.find('.js-prodspecrow-labelfield') })
 
@@ -45,6 +52,7 @@ export default class ProdSpecRow {
     this.trigger = $el.trigger.bind($el)
     this.on = $el.on.bind($el)
 
+    datastate.name = name
     datastate.labels = this.lf.getVal()
 
     this.event()

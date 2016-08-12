@@ -3,99 +3,14 @@
 {% import "tpls/macros.html" as $ %}
 
 {% block content %}
-<div class="temp">
-    <div class="tpl" style="display:none">
-        <div id="tpl_identation" class="identation">  </div>
-        <div id="tpl_tree-node" class="tree-node">
-            <div class="tree-node--line">
-                <div class="tree-node--info">
-                    <div class="icon-collapase collpase"></div>
-                    <div class="icon"></div>
-                    <div class="node-name"></div>
-                </div>
-                <div class="tree-node--editor">
-                    <div class="add-sub">
-                        <div class="icon-add"></div>
-                        add-sub
-                    </div>
-                    <div class="remove">
-                        <div class="icon-remove"></div>
-                        remove
-                    </div>
-                    <div class="edit">
-                        <div class="icon-edit"></div>
-                        edit
-                    </div>
-                </div>
-            </div>
-            <div class="tree-node--sub-nodes">
-            </div>
-        </div>
-    </div>
-    <div class="tree-view">
-        <div class="tree-view--line">
-            <div class="tree-view--info">shangpinleibie</div>
-            <div class="tree-view--editor">
-                <div class="add-sub">
-                    <div class="icon-add"></div>
-                    add-sub
-                </div>
-            </div>
-        </div>
-        <div class="tree-view--nodes"></div>
-    </div>
-</div>
-<div class="main">
-  {% include "pages/_top.html" %}
 
-  <div class="js-prodspecview">
+{% include "pages/_top.html" %}
 
-    <div class="div">
-      <input name="" type="checkbox" class="js-prodspecview-enable" />
-    </div>
+<div class="main row">
 
-    <div class="js-prodspecview-body">
+  {% include "pages/_left.html" %}
+  <div class="body grid">
 
-    </div>
-    {#
-    <div class="js-prodspecrow">
-      <div>
-        <input name="specname" type="text" class="js-prodspecrow-name" />
-      </div>
-
-      <div class="js-labelfield">
-        <input type="text" name="labelfield" class="js-labelfield-input" />
-        <div class="js-labelfield-container"></div>
-        <div class="js-labelfield-autocomplete">
-          <div class="js-labelfield-creator"></div>
-          <ul class="js-labelfield-memolist"></ul>
-        </div>
-      </div>
-
-      <div class="js-prodspecrow-close">X</div>
-    </div>
-    #}
-
-    <div class="js-prodspecview-createrow">新增规格</div>
-
-  </div>
-
-
-
-  <div class="js-thumbnailtableview">
-    <table class="js-thumbnailtableview-table">
-    <thead>
-      <tr class="js-thumbnailtableview-header">
-        <th>#</th>
-      </tr>
-    </thead>
-    <tbody class="js-thumbnailtableview-body">
-      <tr>
-        <td>1</td>
-
-      </tr>
-    </tbody>
-  </table>
   </div>
 
 </div>
@@ -116,3 +31,66 @@
 
 {% extends "tpls/page.html" %}
 
+{#
+<div class="js-prodspecrow">
+  <div>
+    <input name="specname" type="text" class="js-prodspecrow-name" />
+  </div>
+
+  <div class="js-labelfield">
+    <input type="text" name="labelfield" class="js-labelfield-input" />
+    <div class="js-labelfield-container"></div>
+    <div class="js-labelfield-autocomplete">
+      <div class="js-labelfield-creator"></div>
+      <ul class="js-labelfield-memolist"></ul>
+    </div>
+  </div>
+
+  <div class="js-prodspecrow-close">X</div>
+</div>
+#}
+
+{#
+<div class="temp">
+  <div class="tpl" style="display:none">
+    <div id="tpl_identation" class="identation">  </div>
+    <div id="tpl_tree-node" class="tree-node">
+      <div class="tree-node--line">
+        <div class="tree-node--info">
+          <div class="icon-collapase collpase"></div>
+          <div class="icon"></div>
+          <div class="node-name"></div>
+        </div>
+        <div class="tree-node--editor">
+          <div class="add-sub">
+            <div class="icon-add"></div>
+            add-sub
+          </div>
+          <div class="remove">
+            <div class="icon-remove"></div>
+            remove
+          </div>
+          <div class="edit">
+            <div class="icon-edit"></div>
+            edit
+          </div>
+        </div>
+      </div>
+      <div class="tree-node--sub-nodes">
+      </div>
+    </div>
+  </div>
+  <div class="tree-view">
+    <div class="tree-view--line">
+      <div class="tree-view--info">shangpinleibie</div>
+      <div class="tree-view--editor">
+        <div class="add-sub">
+          <div class="icon-add"></div>
+          add-sub
+        </div>
+      </div>
+    </div>
+    <div class="tree-view--nodes"></div>
+  </div>
+</div>
+#}

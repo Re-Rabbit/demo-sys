@@ -8,8 +8,8 @@
 
 ## menu
   
-* [ ] menu (collapse)
-* [ ] submenu (active, hover)
+* [x] menu (collapse)
+* [x] submenu (active, hover)
   
 ## category - listView
 

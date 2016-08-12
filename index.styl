@@ -1,99 +1,51 @@
+@require "_ionicons"
 @require "_config"
 @require "styles/layout"
 @require "styles/reset"
+@require "styles/util/position"
+
 
 export-reset()
 layout-grid-base()
 layout-width-base()
 
+
+/*
 html
 body
 main
 .main
   h 100%
+*/
 
 body
   cc $cc $bg
 
+ul
+  lity no
+  pad 0
+  mar 0
+
+body
+  py $navh + $mainpad
+
+
+.main
+  w $mainw
+  mx a
+  py 2rem
+  bg #fff
+  bdrz 6px
+
+
+
+/// layouts.
 
 @import "./styles/_top"
-
-.js-labelfield-memolist li.active
-  bg red
-
+@import "./styles/_left"
+@import "./styles/_right"
 
 
+/// pages.
 
-// temp code
-
-.temp
-  width 600px
-  margin 0 auto
-  border 1px solid red
-
-.identation
-  display inline-block
-  width 1rem
-
-.tree-node
-  display none
-
-.active > .tree-node--sub-nodes > .tree-node
-  display block
-
-.tree-view--nodes > .tree-node
-  display block
-
-
-.tree-view--line
-  background lightgray
-  padding-left 1rem
-  height 3rem
-
-.tree-view--info
-  display inline-block
-  width 8rem
-  height 3rem
-  line-height 3rem
-
-.tree-view--editor
-  display inline-block
-  height 3rem
-  line-height 3rem
-
-.add-sub
-  display inline-block
-  text-aligh middle
-
-.tree-node--line
-  border-bottom 2px solid gray
-  height 3rem
-  line-height 3rem
-
-.icon-collapase, .icon-add, .icon-remove, .icon-edit, .icon
-  display inline-block
-  background-color lightblue
-  height 1em
-  width 1em
-
-.tree-node--line::after
-  clear both
-
-.tree-node--info
-  display inline-block
-  width 8rem
-  float left
-
-.tree-node--editor
-  display none
-
-.tree-node--line:hover > .tree-node--editor
-    display inline-block
-
-.node-name
-  display inline-block
-
-.add-sub, .remove, .edit
-  display inline-block
-
-
+@import "./styles/_prod-create"

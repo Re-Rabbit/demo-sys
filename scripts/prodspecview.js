@@ -3,7 +3,7 @@ import ProdSpecRow from './prodspecrow.js'
 
 
 const ProdSpecViewTpl = id => `
-<div data-id=${id} class="js-prodspecview-row"></div>
+<div data-id=${id} class="spec-row js-prodspecview-row"></div>
 `
 
 
@@ -18,14 +18,27 @@ export default class ProdSpecView {
     this.init()
   }
 
-  createRow() {
+  createRow(len) {
     let id = Date.now()
 
     let $row = $(ProdSpecViewTpl(id)).appendTo(this.$body)
 
+    let replace = ''
+    switch(len) {
+    case 1:
+      replace = '二'
+      break;
+    case 2:
+      replace = '三'
+      break;
+    default:
+      replace = '一'
+      break;
+    }
+
     let data = {
       $row: $row,
-      row: ProdSpecRow.of({ $el: $row })
+      row: ProdSpecRow.of({ $el: $row, name: '规格' + replace })
     }
 
     this.datastate.rows[id] = data
@@ -57,7 +70,7 @@ export default class ProdSpecView {
 
     this.datastate.rows = {}
     this.datastate.checked = enabled
-    createRow.bind(this)()
+    createRow.bind(this)(0)
 
     this.on = $el.on.bind($el)
     this.trigger = $el.trigger.bind($el)
@@ -85,8 +98,9 @@ export default class ProdSpecView {
 
 
     $create.on('click', function() {
-      if(Object.keys(datastate.rows).length >= 3) return
-      createRow()
+      let len = Object.keys(datastate.rows).length
+      if(len >= 3) return
+      createRow(len)
 
       trigger('prodspecview.export', getVal())
     })

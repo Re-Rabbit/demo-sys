@@ -1,0 +1,32 @@
+{# -*- mode: web -*- #}
+
+{% import "tpls/macros.html" as $ %}
+
+{% block content %}
+
+{% include "pages/_top.html" %}
+
+<div class="main row">
+
+  {% include "pages/_left.html" %}
+  <div class="body grid">
+    {% block body %} {% endblock %}
+  </div>
+
+</div>
+{% endblock %}
+
+
+{% block styles %}
+{{ $.css("index") }}
+{% endblock %}
+
+
+{% block scripts %}
+{{ $.js("/vendor.dll") }}
+{{ $.js("/commons") }}
+{{ $.js("index") }}
+{% endblock %}
+
+
+{% extends "tpls/page.html" %}

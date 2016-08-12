@@ -1,0 +1,38 @@
+{% block body %}
+
+<div class="layout-block">
+  <div class="title">商品规格</div>
+
+  <div class="section-body">
+    <div class="prod-spec js-prodspecview">
+      <div class="prod-spec-header">
+        <label for="enabled">
+          <input name="enabled" type="checkbox" class="switch js-prodspecview-enable" />
+          设置商品多规格
+        </label>
+      </div>
+      <div class="prod-spec-body">
+        <div class="js-prodspecview-body"></div>
+        <div class="spec-action-create js-prodspecview-createrow">
+          <span class="ic ion-ios-add"></span>
+          新增规格
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <div class="spec-tableview js-thumbnailtableview">
+      <table class="spec-table js-thumbnailtableview-table">
+        <thead>
+          <tr class="js-thumbnailtableview-header"></tr>
+        </thead>
+        <tbody class="js-thumbnailtableview-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% extends "pages/_tpl.html" %}

@@ -1,12 +1,28 @@
-@require "_config"
-@require "styles/reset"
+///
+.aside
+  w $leftw
 
-export-reset()
+///
+.menu-title
+  pad 0.5rem 1.5rem
+  cur ptr
 
-html
-body
-main
-  h 100%
+///
+.menu-submenu a
+  dis bl
 
-body
-  cc $cc $bg
+
+///
+.menu-submenu .active
+  bdr 2px solid $pc
+
+  .menu-submenu-item
+    cc $pc
+
+///
+.menu-submenu-item
+  pad 0.5rem 3rem
+
+  &:hover
+    bg $sc
+  

@@ -63,22 +63,22 @@ const ThumbnailTableViewTbodyRowTpl = (row, idx) => `
   <td><div class="js-thumbnailtableview-upload">*</div></td>
   ${row.map(n => `<td>${n}</td>`)}
   <td>ZH2829${idx < 100 ? '0' + idx < 10 ? '00' + idx : idx : idx}</td>
-  <td><input type="text" name="barcode" /></td>
-  <td><input type="text" name="price" /></td>
+  <td><input type="text" name="barcode" class="spec-table-field" /></td>
+  <td><input type="text" name="price" class="spec-table-field" /></td>
   <td><span class="js-thumbnailtableview-action">删除</span></td>
 </tr>
 `
 
 const ThumbnailTableViewTheaderPlaceholderBeforeTpl = _ => `
-<th></th>
-<th class="js-thumbnailtableview-upload">略图</th>
+<th class="spec-table-n1"></th>
+<th class="spec-table-n2 js-thumbnailtableview-upload">略图</th>
 `
 
 const ThumbnailTableViewTheaderPlaceholderAfterTpl = _ => `
-<th>商品编码</th>
-<th>条形码</th>
-<th>售价</th>
-<th>操作</th>
+<th class="spec-table-n3">商品编码</th>
+<th class="spec-table-n4">条形码</th>
+<th class="spec-table-n5">售价</th>
+<th class="spec-table-n6">操作</th>
 `
 
 const ThumbnailTableViewTheaderTpl = (header) => `

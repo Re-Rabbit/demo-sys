@@ -12,14 +12,16 @@ export const LabelFieldTpl = _ => `
 `
 
 const LabelFieldLabelTpl = data => `
-<div class="js-labelfield-label">
-  <div class="js-labelfield-close">x</div>
+<div class="labelfield-label js-labelfield-label">
+  <div class="labelfield-label-close js-labelfield-close">
+    <span class="ic ion-ios-close-outline"></span>
+  </div>
   ${data}
 </div>
 `
 
 const LabelFieldListCreateTpl = data => `
-<div class="js-labelfield-creator-container">
+<div class="labelfield-createor js-labelfield-creator-container">
   新增规格：
   <span class="js-labelfield-creator-content">
     ${data}
@@ -29,7 +31,7 @@ const LabelFieldListCreateTpl = data => `
 
 const LabelFieldMemoTpl = data => `
 <li>
-  <div class="js-labelfield-memolistitem">${data}</div>
+  <div class="labelfield-memolistitem js-labelfield-memolistitem">${data}</div>
 </li>
 `
 

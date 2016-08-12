@@ -1,24 +1,27 @@
 {# -*- mode: web -*- #}
 
-{% import "tpls/macros.html" as $ %}
+<div class="layout-left aside grid">
+  <div class="menu">
+    <div class="menu-title">
+商品列表
+    </div>
+    <ul class="menu-submenu">
+      <li class="active">
+        <a href="#">
+          <div class="menu-submenu-item">
+            商品类别
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="menu-submenu-item">
+            联系人查询
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
 
-{% block content %}
-  <main>
-  </main>
-{% endblock %}
-
-
-{% block styles %}
-  {{ $.css("index") }}
-{% endblock %}
-
-
-{% block scripts %}
-  {{ $.js("/vendor.dll") }}
-  {{ $.js("/commons") }}
-  {{ $.js("index") }}
-{% endblock %}
-
-
-{% extends "tpls/page.html" %}
+</div>
 
