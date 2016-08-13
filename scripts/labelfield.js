@@ -12,11 +12,11 @@ export const LabelFieldTpl = _ => `
 `
 
 const LabelFieldLabelTpl = data => `
-<div class="labelfield-label js-labelfield-label">
+<div class="labelfield-label js-labelfield-label" data-id="${data.id}">
   <div class="labelfield-label-close js-labelfield-close">
     <span class="ic ion-ios-close-outline"></span>
   </div>
-  ${data}
+  ${data.data}
 </div>
 `
 
@@ -79,13 +79,16 @@ class LabelField {
       $creator,
       $ac,
       datastate,
-      memorizelist
+      memorizelist,
+      trigger,
+      on
     } = this
 
 
     function dropActived(n) {
       return Object.values(datastate).indexOf(n) === -1
     }
+
 
     function checkLabelExisting(data) {
       let out = false
@@ -96,6 +99,7 @@ class LabelField {
 
       return out
     }
+
 
     function checkMemoExisting(data) {
       let out = false
@@ -108,23 +112,66 @@ class LabelField {
     }
 
 
+    function findLastDate() {
+      let out = null
+      for(let k in datastate) {
+        if(!out) {
+          out = k
+        } else {
+          if(k > out) {
+            out = k
+          } else {
+            break;
+          }
+        }
+      }
+
+      return out
+    }
+
+
     /**
      * Components/LabelField InputField Changed.
      */
 
     $input.on('keyup', function(evt) {
+      let val = $(this).val().trim()
+      $el.trigger('labelfield.creator', val)
+    })
+
+
+    /**
+     * Components/LabelField KeyBinding.
+     */
+
+    $input.on('keydown', function(evt) {
       let isEnterKey = evt.which === 9 || evt.which === 13
       let isDirectionKey = evt.which === 38 || evt.which === 40
+      let isDeleteKey = evt.which === 8
       let val = $(this).val().trim()
 
-      if(isEnterKey && val) $el.trigger('labelfield.create', val)
+      if(isEnterKey && val) {
+        $el.trigger('labelfield.create', val)
+
+        // Refocus input field.
+        setTimeout(_ => {
+          $input.focus()
+        }, 66)
+      }
+
       if(isDirectionKey) {
+        // Can't rerender list.
         $el.trigger('labelfield.activelist', evt.which)
       } else {
         $el.trigger('labelfield.buildmemolist')
       }
 
-      $el.trigger('labelfield.creator', val)
+      if(isDeleteKey) {
+        $el.find(`.js-labelfield-label[data-id="${findLastDate(datastate)}"] .js-labelfield-close`)
+          .click()
+        $el.trigger('labelfield.buildmemolist')
+      }
+
     })
 
 
@@ -133,9 +180,7 @@ class LabelField {
      */
 
     $input.on('focusin focusout', function(evt) {
-      setTimeout(_ => {
-        $ac.css('display', evt.type === 'focusin' ? 'block' : 'none')
-      }, 100)
+      $ac.css('display', evt.type === 'focusin' ? 'block' : 'none')
     })
 
 
@@ -167,7 +212,7 @@ class LabelField {
         data: data
       }
 
-      $(LabelFieldLabelTpl(data)).on('click', '.js-labelfield-close', function(evt) {
+      $(LabelFieldLabelTpl(label)).on('click', '.js-labelfield-close', function(evt) {
         $(evt.delegateTarget).remove()
         $el.trigger('labelfield.remove', label)
       }).appendTo($container)
@@ -205,6 +250,8 @@ class LabelField {
 
       if(key === 38) $(li).eq(Math.max(0, curr - 1)).addClass('active')
       if(key === 40) $(li).eq(Math.min(li.length - 1, curr + 1)).addClass('active')
+
+      $input.val($list.find('li.active').text().trim())
     })
 
 
@@ -221,7 +268,9 @@ class LabelField {
      * Components/LabelField Trigger Click.
      */
 
+    /*
     $el.on('click', '.js-labelfield-memolistitem', function() {
+      console.log($(this).text().trim())
       $el.trigger('labelfield.create', $(this).text().trim())
     })
 
@@ -229,7 +278,7 @@ class LabelField {
       let $ctx = $(this).find('.js-labelfield-creator-content')
       $el.trigger('labelfield.create', $ctx.text().trim())
     })
-
+    */
 
   }
 }

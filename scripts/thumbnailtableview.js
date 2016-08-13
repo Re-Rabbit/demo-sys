@@ -62,9 +62,9 @@ const ThumbnailTableViewTbodyRowTpl = (row, idx) => `
   <td>${idx}</td>
   <td><div class="js-thumbnailtableview-upload">*</div></td>
   ${row.map(n => `<td>${n}</td>`)}
-  <td>ZH2829${idx < 100 ? '0' + idx < 10 ? '00' + idx : idx : idx}</td>
-  <td><input type="text" name="barcode" class="spec-table-field" /></td>
-  <td><input type="text" name="price" class="spec-table-field" /></td>
+  <td>ZH2829${idx < 100 ? '0' + (idx < 10 ? '0' + idx : idx) : idx}</td>
+  <td><input type="text" name="barcode" class="field spec-brfield" value="123456789" /></td>
+  <td><input type="text" name="price" class="field spec-pricefield" value="100.00" /></td>
   <td><span class="js-thumbnailtableview-action">删除</span></td>
 </tr>
 `

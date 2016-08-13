@@ -9,14 +9,14 @@ export const ProdSpecRowTpl = name => `
       </div>
     </div>
     <div class="grid width--9">
-      <div class="spce-labelfield js-prodspecrow-labelfield js-labelfield">
+      <label class="spce-labelfield js-prodspecrow-labelfield js-labelfield" for="labelfield-${Date.now()}">
         <div class="spec-labelfield-labels js-labelfield-container"></div>
-        <input type="text" name="labelfield" class="spce-labelfield-field js-labelfield-input" />
+        <input type="text" name="labelfield" class="spce-labelfield-field js-labelfield-input" id="labelfield-${Date.now()}" />
         <div class="js-labelfield-autocomplete">
           <div class="js-labelfield-creator"></div>
           <ul class="labelfield-memolist js-labelfield-memolist"></ul>
         </div>
-      </div>
+      </label>
     </div>
 
     <div class="grid width--1">
