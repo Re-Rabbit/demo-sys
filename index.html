@@ -24,7 +24,7 @@
 
 {% block scripts %}
   {{ $.js("/vendor.dll") }}
-  {{ $.js("/commons") }}
+<!-- {{ $.js("/commons") }} -->
   {{ $.js("index") }}
 {% endblock %}
 
@@ -50,47 +50,3 @@
 </div>
 #}
 
-{#
-<div class="temp">
-  <div class="tpl" style="display:none">
-    <div id="tpl_identation" class="identation">  </div>
-    <div id="tpl_tree-node" class="tree-node">
-      <div class="tree-node--line">
-        <div class="tree-node--info">
-          <div class="icon-collapase collpase"></div>
-          <div class="icon"></div>
-          <div class="node-name"></div>
-        </div>
-        <div class="tree-node--editor">
-          <div class="add-sub">
-            <div class="icon-add"></div>
-            add-sub
-          </div>
-          <div class="remove">
-            <div class="icon-remove"></div>
-            remove
-          </div>
-          <div class="edit">
-            <div class="icon-edit"></div>
-            edit
-          </div>
-        </div>
-      </div>
-      <div class="tree-node--sub-nodes">
-      </div>
-    </div>
-  </div>
-  <div class="tree-view">
-    <div class="tree-view--line">
-      <div class="tree-view--info">shangpinleibie</div>
-      <div class="tree-view--editor">
-        <div class="add-sub">
-          <div class="icon-add"></div>
-          add-sub
-        </div>
-      </div>
-    </div>
-    <div class="tree-view--nodes"></div>
-  </div>
-</div>
-#}

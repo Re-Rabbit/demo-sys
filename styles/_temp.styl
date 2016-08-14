@@ -1,16 +1,74 @@
 // temp code
 
 .temp
-  width 600px
+  width 1024px
   margin 0 auto
-  border 1px solid red
+  background-color white
+  padding 4rem
+  //border 1px solid red
+
+// line
+
+line-item()
+  line-height 44px
+  height 44px
+  vertical-align middle
+  box-sizing border-box
+  
+l-pad=24px
+
+
+// icon
+
+.icon-blue
+  color blue
+
+.icon-collapse
+  display inline-block
+  background-color darkgreen 
+  line-item()
+  height 1rem
+  width 1rem
+.active > .tree-node--line > .tree-node--info > .icon-collapse
+  background-color lightgreen
+
+.icon-folder
+  display inline-block
+  background-color lightblue
+  height 2rem
+  width 2rem
+  line-item()
+.active > .tree-node--line > .tree-node--info > .icon-folder
+  background-color darkcyan
+
+
+// tree-view
 
 .identation
   display inline-block
+  line-item()
   width 1rem
+  height 1rem
+  float left
+
+.tree-view--line
+  padding-left l-pad
+  line-item()
+  background-color lightgray
+
+.tree-view--info
+  display inline-block
+  width 200px
+  line-item()
+
+.tree-view--editor
+  display inline-block
+  line-item()
+
 
 .tree-node
   display none
+  background-color white
 
 .active > .tree-node--sub-nodes > .tree-node
   display block
@@ -18,49 +76,18 @@
 .tree-view--nodes > .tree-node
   display block
 
-
-.tree-view--line
-  background lightgray
-  padding-left 1rem
-  height 3rem
-
-.tree-view--info
-  display inline-block
-  width 8rem
-  height 3rem
-  line-height 3rem
-
-.tree-view--editor
-  display inline-block
-  height 3rem
-  line-height 3rem
-
-.add-sub
-  display inline-block
-  text-aligh middle
-
 .tree-node--line
-  border-bottom 2px solid gray
-  height 3rem
-  line-height 3rem
-
-.icon-collapase, .icon-add, .icon-remove, .icon-edit, .icon
-  display inline-block
-  background-color lightblue
-  height 1em
-  width 1em
-
-.tree-node--line::after
-  clear both
+  border-bottom 2px solid lightgray
+  line-item()
+  padding-left l-pad
 
 .tree-node--info
   display inline-block
-  width 8rem
-  float left
+  min-width 8rem
+  line-item()
 
 .tree-node--editor
   display none
-
 .tree-node--line:hover > .tree-node--editor
     display inline-block
 
@@ -69,5 +96,6 @@
 
 .add-sub, .remove, .edit
   display inline-block
+  padding-left l-pad
 
 
