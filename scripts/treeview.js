@@ -19,35 +19,39 @@ function create_tree_node(n, identation){
          return ture
      })
      if(children.length == 0){
-         tree_node.find('.colloase').hide()
+         tree_node.find('.collapse')
+             .removeClass('icon-collapse')
+             .addClass('identation')
      }
 
      return tree_node
  }
- var node_root = [
-     { name: 'zhixiang',
-       children: [
-           { name: 'biaozhun',
-             children: [
-                 { name: 'dingzhi',
-                   children: [] },
-             ] },
-           { name: 'yiside',
-             children: [
-                 { name: 'dingzhi',
-                   children: [] },
-             ] },
-           { name: 'dingzhi',
-             children: [
-                 { name: 'dingzhi',
-                   children: [] },
-             ] },
-
-       ] },
- ]
 
  function render_tree_nodes(node_root, target){
      node_root.forEach(i=>create_tree_node(i, 0).appendTo(target))
  }
 
- $(()=>render_tree_nodes(node_root, $('.tree-view--nodes')))
+
+var node_root = [
+    { name: '纸箱',
+      children: [
+          { name: '标准箱',
+            children: [
+                { name: '定制箱',
+                  children: [] },
+            ] },
+          { name: '一撕得',
+            children: [
+                { name: '定制箱',
+                  children: [] },
+            ] },
+          { name: '定制箱',
+            children: [
+                { name: '定制箱',
+                  children: [] },
+            ] },
+
+      ] },
+]
+
+$(()=>render_tree_nodes(node_root, $('.tree-view--nodes')))
