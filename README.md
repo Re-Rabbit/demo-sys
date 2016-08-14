@@ -2,8 +2,8 @@
 
 ## header
 
-* [ ] header navigation
-* [ ] header logo
+* [x] header navigation
+* [x] header logo
 * [ ] header login
 
 ## menu

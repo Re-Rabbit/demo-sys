@@ -99,21 +99,34 @@ export default class ProdSpecView {
 
     $create.on('click', function() {
       let len = Object.keys(datastate.rows).length
-      if(len >= 3) return
+      if(len >= 3) {
+        return
+      }
       createRow(len)
-
+      trigger('prodspecview.updaterow')
       trigger('prodspecview.export', getVal())
     })
 
 
     $el.on('prodspecrow.removerow', '.js-prodspecview-row', function() {
-      if(Object.keys(datastate.rows).length <= 1) return
+      let len = Object.keys(datastate.rows).length
+      if(len <= 1) {
+        alert('规格启用时，至少保留一个规格')
+        return
+      }
 
       let id = $(this).data('id')
       datastate.rows[id].$row.remove()
       delete datastate.rows[id]
 
+      trigger('prodspecview.updaterow')
       trigger('prodspecview.export', getVal())
+    })
+
+
+    $el.on('prodspecview.updaterow', function() {
+      let len = Object.keys(datastate.rows).length
+      $create.css('display', len >= 3 ? 'none' : 'inline-block')
     })
 
 

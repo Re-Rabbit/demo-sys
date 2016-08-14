@@ -1,0 +1,54 @@
+///
+.selectfield
+  pos rela
+
+
+///
+.selectfield-field
+  py 0.65rem
+  pr 2rem
+  cur ptr
+
+
+///
+.selectfield-icon
+  u-fill r
+  lh $field-h
+  size 2rem $field-h
+  ta cen
+  trans transform $trans
+
+  .ic
+    cc $g3
+
+  .selectfield.active &
+      tf rotate(-180deg)    
+
+
+///
+.selectfield-placeholder
+  cc $g3
+
+
+
+///
+.selectfield-optionslist
+  mt 0.4rem
+  bd $bd
+  bdrz 4px
+  bg #fff
+
+  u-fill t
+  t $field-h
+  w 100%
+  dis no
+
+
+///
+.selectfield-option
+  fz 0.85rem
+  pad 0.5rem 0.8rem
+  cur ptr
+
+  .selectfield-optionslist li.active &
+    bg $g1

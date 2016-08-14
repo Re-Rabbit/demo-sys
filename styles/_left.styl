@@ -1,27 +1,39 @@
-///
+/// Layout.
 .aside
   w $leftw
 
-///
+
+/// Menu Title.
 .menu-title
   pad 0.5rem 1.5rem
   cur ptr
 
-///
+  .ic
+    trans transform $trans
+    cc $g3
+
+  &.active
+    .ic
+      tf rotate(-180deg)
+
+
+/// Menu Fill Container.
 .menu-submenu a
   dis bl
 
 
-///
+/// Submenu Actived.
 .menu-submenu .active
   bdr 2px solid $pc
 
   .menu-submenu-item
     cc $pc
 
-///
+
+/// Submenu Item.
 .menu-submenu-item
   pad 0.5rem 3rem
+  trans background-color $trans
 
   &:hover
     bg $sc

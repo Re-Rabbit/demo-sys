@@ -1,35 +1,153 @@
 {% block body %}
 
 <div class="layout-block">
-  <div class="title">商品规格</div>
 
-  <div class="section-body">
-    <div class="prod-spec js-prodspecview">
-      <div class="prod-spec-header">
-        <label for="enabled">
-          <input name="enabled" type="checkbox" class="switch js-prodspecview-enable" />
-          设置商品多规格
-        </label>
-      </div>
-      <div class="prod-spec-body">
-        <div class="js-prodspecview-body"></div>
-        <div class="spec-action-create js-prodspecview-createrow">
-          <span class="ic ion-ios-add"></span>
-          新增规格
+  <div class="section">
+    <div class="title">基本信息</div>
+    <div class="section-body">
+
+      <div class="row">
+        <div class="grid width--6">
+
+          <div class="form-grid">
+            <label for="">
+              <div class="row">
+                <div class="grid width--3">
+                  <div class="form-label">
+                    商品名称
+                  </div>
+                </div>
+                <div class="grid width--9">
+                  <input name="" type="text" class="field"/>
+                </div>
+              </div>
+            </label>
+          </div>
+
         </div>
+
+        <div class="grid width--6">
+
+          <div class="form-grid">
+            <label for="">
+              <div class="row">
+                <div class="grid width--3">
+                  <div class="form-label">
+                    计量单位
+                  </div>
+                </div>
+                <div class="grid width--9">
+
+                  <input name="" type="text" class="field"/>
+                </div>
+              </div>
+            </label>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="grid width--6">
+
+          <div class="form-grid">
+            <label for="">
+              <div class="row">
+                <div class="grid width--3">
+                  <div class="form-label">
+                    商品类别
+                  </div>
+                </div>
+                <div class="grid width--9">
+                  <div class="selectfield">
+                    <div class="field selectfield-field">
+                      <span class="selectfield-placeholder">选择商品类别</span>
+                    </div>
+                    <div class="selectfield-icon">
+                      <span class="ic ion-ios-arrow-up-outline"></span>
+                    </div>
+
+                    <ul class="selectfield-optionslist">
+                      <li class="active">
+                        <div class="selectfield-option">
+                          测试一
+                        </div>
+                      </li>
+                      <li>
+                        <div class="selectfield-option">
+                          测试二
+                        </div>
+                      </li>
+                      <li>
+                        <div class="selectfield-option">
+                          测试三
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </label>
+          </div>
+
+        </div>
+
+        <div class="grid width--6">
+
+          <div class="form-grid">
+            <label for="">
+              <div class="row">
+                <div class="grid width--3">
+                  <div class="form-label">
+                    是否上架
+                  </div>
+                </div>
+                <div class="grid width--9">
+                  <input name="" type="text" class="field"/>
+                </div>
+              </div>
+            </label>
+          </div>
+
+        </div>
+
       </div>
     </div>
   </div>
 
-  <div class="section-body">
-    <div class="spec-tableview js-thumbnailtableview">
-      <table class="spec-table js-thumbnailtableview-table">
-        <thead>
-          <tr class="js-thumbnailtableview-header"></tr>
-        </thead>
-        <tbody class="js-thumbnailtableview-body"></tbody>
-      </table>
+  <div class="section">
+    <div class="title">商品规格</div>
+
+    <div class="section-body">
+      <div class="js-prodspecview">
+        <div class="spec-header">
+          <label for="enabled">
+            <input name="enabled" id="enabled" type="checkbox" class="switch js-prodspecview-enable" />
+            设置商品多规格
+          </label>
+        </div>
+        <div class="spec-body">
+          <div class="js-prodspecview-body"></div>
+          <div class="spec-action-create js-prodspecview-createrow">
+            <span class="ic ion-ios-add"></span>
+            新增规格
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="section-body">
+      <div class="spec-tableview js-thumbnailtableview">
+        <table class="spec-table js-thumbnailtableview-table">
+          <thead>
+            <tr class="js-thumbnailtableview-header"></tr>
+          </thead>
+          <tbody class="js-thumbnailtableview-body"></tbody>
+        </table>
+      </div>
+    </div>
+
   </div>
 </div>
 

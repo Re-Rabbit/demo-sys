@@ -1,11 +1,21 @@
 {# -*- mode: web -*- #}
 
 <div class="layout-left aside grid">
-  <div class="menu">
-    <div class="menu-title">
-商品列表
+  <div class="js-menu">
+  <div class="menu collapsible">
+
+    <div class="menu-title collapsible-trigger">
+      <div class="row">
+        <div class="grid">
+          商品列表
+        </div>
+        <div class="grid-last">
+          <div class="ic ion-ios-arrow-down-outline"></div>
+        </div>
+      </div>
     </div>
-    <ul class="menu-submenu">
+
+    <ul class="menu-submenu collapsible-list">
       <li class="active">
         <a href="#">
           <div class="menu-submenu-item">
@@ -23,5 +33,36 @@
     </ul>
   </div>
 
-</div>
+  <div class="menu collapsible">
 
+    <div class="menu-title collapsible-trigger">
+      <div class="row">
+        <div class="grid">
+          测试
+        </div>
+        <div class="grid-last">
+          <div class="ic ion-ios-arrow-down-outline"></div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="menu-submenu collapsible-list">
+      <li class="">
+        <a href="#">
+          <div class="menu-submenu-item">
+            测试一
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <div class="menu-submenu-item">
+            测试二
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  </div>
+
+</div>

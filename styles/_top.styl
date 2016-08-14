@@ -1,20 +1,44 @@
+/// Layout.
 .layout-top
   u-fill t
   mih $navh
   bg #fff
 
+
+/// Logo Button.
 .logo
   pad 1.8rem
 
 
-.nav li.active
-  bdb 3px solid $pc
-
+/// Navigation.
 .nav li
   dis ib
-  
+  bdb 3px solid a0
+  trans border-color $trans
+
+  &:hover
+    bdb 3px solid $sc
+  &.active
+    bdb 3px solid $pc
+
+
+/// Navigation Item.
 .nav-item
   h $navh
   lh $navh
   px 1.5rem
   ta cen
+
+
+/// Login Button.
+.login
+  py 1.7rem
+  px 2rem
+  lh 1.3
+  ml 2rem
+
+  .ic
+    fz 1.75rem
+    mr 0.25rem
+    va middle
+    cc $pc

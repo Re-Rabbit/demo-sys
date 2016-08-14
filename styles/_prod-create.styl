@@ -4,21 +4,26 @@
   fw bolder
   mb 1rem
 
+
 ///
 .section-body
   px 1rem
   mb 2rem
 
-///
-.prod-spec-header
-  bg $g2
-  pad 1rem
 
 ///
-.prod-spec-body
+.spec-header
+  bg $g2
+  pad 0.8rem
+
+
+///
+.spec-body
   bg $g1
   pad 2rem 1rem
   pb 0.5rem
+  bdrzb 6px
+
 
 ///
 .spec-action-create
@@ -29,6 +34,7 @@
   .ic
     cc $pc
     fz 1.25rem
+
 
 ///
 .spec-row
@@ -56,12 +62,14 @@
 ///
 .spec-closed
   ta cen
+  cur ptr
   .ic
     fz 2rem
 
 
 ///
 .spce-labelfield
+  dis bl
   bd 1px solid $g3
   bdrz 4px
   bg #fff
@@ -108,15 +116,20 @@
 
 ///
 .labelfield-createor
-  //bdb $bd
+  bdt $bd
+  pad 0.25rem 0.5rem
+  fz 0.85rem
+  bg $g1
 
 
-///
-.labelfield-memolist li.active
-  bg $sc
-  pad 0.25rem
+/// 
+.labelfield-memolistitem
+  pad 0.25rem 0.5rem
   bdrz 4px
+  fz 0.85rem
 
+  .labelfield-memolist li.active &
+    bg $sc
 
 
 ///
@@ -126,32 +139,24 @@
   td
   th
     ta cen
-    bdr $bd
-    bdb $bd
-    pad 0
-
-    &:first-child
-      bdl $bd
-
-  th
-    bdt $bd
-    bg $g2
-
-  th
-    &:nth-child(1)
-      pad 1rem
-      bg $g2
-
-  td
-    &:first-child
-      bg $g2
-
-  td
+    bdr $bd1
+    bdb $bd1
     pad 0.5rem
+
+    &:first-child
+      bdl $bd1
+
+  th
+    bdt $bd1
+    bg $g1
+
+  td
+    &:first-child
+      bg $g1
 
 
 .spec-table-n1
-  w 60px
+  w 30px
 .spec-table-n2
   w 80px
 .spec-table-n3
@@ -164,12 +169,8 @@
   w 80px
 
 
-.spec-table-field
-  reset-theme()
-  reset-space()
-  reset-font()
+.spec-brfield
+  ta cen
 
-  bd $bd
-  pad 0.5rem
-  bdrz 4px
-  w 100%
+.spec-pricefield
+  ta right
