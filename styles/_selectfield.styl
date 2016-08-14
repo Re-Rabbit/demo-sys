@@ -45,10 +45,16 @@
 
 
 ///
-.selectfield-option
+.selectfield-dd
   fz 0.85rem
   pad 0.5rem 0.8rem
   cur ptr
 
-  .selectfield-optionslist li.active &
+
+///
+.selectfield-option
+  &:hover
     bg $g1
+
+  &.active
+    bg $sc

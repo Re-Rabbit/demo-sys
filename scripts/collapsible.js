@@ -13,9 +13,6 @@ class Collapsible {
 
   init() {
     let { $el } = this
-    this.height = $el.height()
-    $el.css('overflow-y', 'hidden')
-
     this.event()
   }
 
@@ -46,7 +43,7 @@ class Collapsible {
     getState = getState.bind(this)
 
 
-    $trigger.on('click.collapsible', function() {
+    $trigger.on('click.collapsible', function(evt) {
 
       let state = getState()
 
@@ -54,12 +51,7 @@ class Collapsible {
 
       setState(1)
 
-      let args = state === 0
-          ? [{ height: 0 }, speed, _ => setState(2)]
-          : [{ height: height }, speed, _ => setState(0)]
-
-
-      $el.stop().animate.apply($el, args)
+      $el.stop().slideToggle(speed, _ => setState(state === 0 ? 2 : 0))
 
     })
   }
