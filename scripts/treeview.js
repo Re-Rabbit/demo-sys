@@ -19,7 +19,9 @@ function create_tree_node(n, identation){
          return ture
      })
      if(children.length == 0){
-         tree_node.find('.collapse').hide()
+         tree_node.find('.collapse')
+             .removeClass('icon-collapse')
+             .addClass('identation')
      }
 
      return tree_node
