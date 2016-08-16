@@ -33,9 +33,10 @@ class Selectfield {
   }
 
   render(cb) {
+    let { $list } = this
     if(typeof cb !== 'function') throw new Error('Not a function.')
 
-    this.$list.html(cb())
+    cb($list.empty(), this)
 
     return this
   }
@@ -133,14 +134,15 @@ export function selectfieldApply($list) {
 }
 
 
-const SelectfieldListViewTpl = data => `
+export const SelectfieldListViewTpl = data => `
 <div class="selectfield-option selectfield-dd" data-id="${data.id}">
   ${data.value}
 </div>
 `
 
-export function renderListView(datas) {
-  return _ => datas.map(SelectfieldListViewTpl)
+export const renderListView = datas => $list => {
+  let out = datas.map(SelectfieldListViewTpl).join('')
+  $list.append(out)
 }
 
 

@@ -18,7 +18,7 @@
                   </div>
                 </div>
                 <div class="grid width--9">
-                  <input name="" type="text" class="field"/>
+                  <input name="" type="text" class="field" placeholder="输入商品名称" />
                 </div>
               </div>
             </label>
@@ -38,7 +38,22 @@
                 </div>
                 <div class="grid width--9">
 
-                  <input name="" type="text" class="field"/>
+                  <div class="selectfield js-units">
+                    <div class="field selectfield-field">
+                      <span class="selectfield-placeholder">是否上架商品</span>
+                    </div>
+                    <div class="selectfield-icon">
+                      <span class="ic ion-ios-arrow-up-outline"></span>
+                    </div>
+                    <div class="selectfield-optionslist">
+                      <div class="spec-unitsfield-create js-units-create">
+                        <span class="ic ion-ios-add"></span>
+                        新增规格
+                      </div>
+                    </div>
+
+                  </div>
+
                 </div>
               </div>
             </label>
@@ -115,15 +130,15 @@
                               <ul class="treeview-list">
                                 <li>
                                   <div class="treeview treeview-depth--2">
-                                    <div class="treeview-content selectfield-option" data-id="1">
-                                      cewcwe
+                                    <div class="treeview-content selectfield-option" data-id="3">
+                                      test3
                                     </div>
                                   </div>
                                 </li>
                                 <li>
                                   <div class="treeview treeview-depth--2">
-                                    <div class="treeview-content selectfield-option" data-id="2">
-                                      asdf
+                                    <div class="treeview-content selectfield-option" data-id="4">
+                                      test4
                                     </div>
                                   </div>
                                 </li>
@@ -208,8 +223,125 @@
     </div>
 
   </div>
+
+
+  <div class="section">
+    <div class="title">商品附件</div>
+
+    <div class="section-body">
+
+      <div class="spec-option-title">
+      <div class="row">
+        <div class="grid">
+          <label class="spec-option-upload" for="specOption">
+            <span class="ic ion-ios-add"></span>
+            添加附件
+            <input name="specOption" id="specOption" type="file" class="spec-option-uploadfield"/>
+          </label>
+        </div>
+        <div class="grid-last">
+          <div class="spec-option-detail">
+            商品附件最大20M，支持格式：PDF、Word、Excel、Txt、JPG、PNG、BMP、GIF、RAR、ZIP
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <ul class="spec-option-list">
+        <li>
+          <div class="spec-option-item">
+            <div class="row">
+              <div class="grid">
+                <div class="spec-option-itemname">
+                  <a href="#">5635b824905e06558d2e9ebd7ee74084.gif</a>
+                </div>
+                <div class="spec-option-itemsize">
+                  7717.95KB
+                </div>
+              </div>
+
+              <div class="grid-last">
+                <div class="spec-option-actions">
+                  <div class="spec-option-action js-specoption-download">
+                    <div class="spec-option-icon">
+                      <span class="ic ion-ios-cloud-download-outline"></span>
+                    </div>
+                    下载
+                  </div>
+
+                  <div class="spec-option-action js-specoption-delete">
+                    <div class="spec-option-icon">
+                      <span class="ic ion-ios-trash-outline"></span>
+                    </div>
+                    删除
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="section">
+      <div class="title">商品信息</div>
+
+      <div class="section-body">
+        <textarea class="spec-note field areafield" id="" name="" rows="10"></textarea>
+      </div>
+    </div>
+
+
+    <div class="section">
+      <div class="spec-submitbtns">
+        <button class="button button-primary js-spec-action-create">保存</button>
+        <button class="button js-spec-action-cancle">取消</button>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 {% endblock %}
+
+
+
+{% block modal %}
+<div class="modal spec-units-modal">
+  <div class="modal-bg"></div>
+  <div class="modal-main spec-units-modal-main">
+    <div class="modal-header">
+      <div class="modal-close">
+        <span class="ion-ios-close-outline"></span>
+      </div>
+      新增单位
+    </div>
+    <div class="modal-footer">
+      <button class="button button-primary js-modal-action-1">确定</button>
+      <button class="button js-modal-close js-modal-action-0">取消</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="spec-units-field">
+        <label for="specUnits">
+          <div class="row">
+            <div class="grid width--3">
+              <div class="form-label">
+                输入单位名称
+              </div>
+            </div>
+            <div class="grid width--9">
+              <input name="specUnits" id="specUnits" type="text" class="field"/>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
 
 {% extends "pages/_tpl.html" %}

@@ -3,7 +3,9 @@ import Collapsible, { collapsibleApply } from './scripts/collapsible.js'
 import ProdSpecView from './scripts/prodspecview.js'
 import ThumbnailTableView from './scripts/thumbnailtableview.js'
 
-import Selectfield, { selectfieldApply, renderListView, renderTreeView } from './scripts/selectfield.js'
+import Selectfield, { selectfieldApply, renderListView, renderTreeView, SelectfieldListViewTpl } from './scripts/selectfield.js'
+
+import Modal from './scripts/modal.js'
 
 
 collapsibleApply($('.js-menu'))
@@ -27,6 +29,50 @@ let listViewData = [
 Selectfield.of({ $el: $('.js-isprodshelves') })
   .render(renderListView(listViewData))
   .setVal(listViewData[0])
+
+let unitsListViewData = [
+  { id: 1, value: '件' },
+  { id: 2, value: '个' }
+]
+
+let modal = Modal.of({ $el: $('.spec-units-modal') })
+let selectfield = Selectfield.of({ $el: $('.js-units') })
+
+
+const unitsRenderView = datas => ($list, selectfield) => {
+  let out = datas.map(SelectfieldListViewTpl).join('')
+  out += `
+<div class="spec-unitsfield-create js-units-create">
+  <span class="ic ion-ios-add"></span>
+  新增规格
+</div>
+`
+
+  $list.append(out)
+    .on('click.modal.open', '.js-units-create', function(evt) {
+      modal.show()
+    })
+}
+
+modal.on('modal.action1', function() {
+  let $input = modal.$el.find('#specUnits')
+
+  let data = {
+    id: Date.now(),
+    value: $input.val()
+  }
+
+  unitsListViewData.push(data)
+
+  selectfield.render(unitsRenderView(unitsListViewData))
+    .setVal(data)
+
+  modal.hide()
+
+  $input.val('')
+})
+
+selectfield.render(unitsRenderView(unitsListViewData))
 
 
 let treeViewData = {

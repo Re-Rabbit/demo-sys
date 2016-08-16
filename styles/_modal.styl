@@ -1,0 +1,72 @@
+///
+.modal
+  u-fill a true
+  dis no
+
+
+///
+.modal-bg
+  u-fill a true
+  z 1
+  bg #000
+  op 0
+  trans opacity $trans
+  .modal.active &
+    op 0.28
+  
+
+
+///
+.modal-main
+  u-fill tl true
+  z 2
+  t 50%
+  l 50%
+  bg #fff
+  bdrz 4px
+  py $modal-h
+  op 0
+  tf translate3d(0, -20%, 0)
+  trans all $trans
+  .modal.active &
+    op 1
+    tf translate3d(0, 0%, 0)
+
+
+///
+.modal-header
+  u-fill t
+  pad 1rem
+  pr 3rem
+  bg $g1
+  bdrzt 4px
+  bdb $bd
+  mah $modal-h
+
+
+///
+.modal-close
+  u-fill r
+  w 3rem
+  ta cen
+  fz 2rem
+  py 0.25rem
+  cur ptr
+
+
+///
+.modal-footer
+  u-fill b
+  pad 0.55rem 1rem
+  bg $g1
+  bdrzb 4px
+  ta right
+  bdt $bd
+  mah $modal-h
+
+
+///
+modal-size($w, $h = $w)
+  size $w $h
+  ml: -($w / 2)
+  mt: -($h / 2)
