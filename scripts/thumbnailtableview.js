@@ -60,10 +60,25 @@ function xprod3(a, b, c) {
 const ThumbnailTableViewTbodyRowTpl = (row, idx) => `
 <tr>
   <td>${idx}</td>
-  <td><div class="js-thumbnailtableview-upload">*</div></td>
-  ${row.map(n => `<td>${n}</td>`)}
-  <td>ZH2829${idx < 100 ? '0' + (idx < 10 ? '0' + idx : idx) : idx}</td>
-  <td><input type="text" name="barcode" class="field spec-brfield" value="123456789" /></td>
+  <td>
+    <div class="spec-tableview-upload js-thumbnailtableview-upload">
+      <img src="/images/pic.png" />
+    </div>
+    <input type="hidden" name="specPic" value="pic" />
+  </td>
+  ${row.map((n, i) => `
+    <td>
+      ${n}
+      <input type="hidden" name="productLabelValue${i + 1}" value="${n}" />
+    </td>
+  `)}
+  <td>
+    ZH2829${idx < 100 ? '0' + (idx < 10 ? '0' + idx : idx) : idx}
+    <input type="hidden" name="code" value="ZH2829${idx < 100 ? '0' + (idx < 10 ? '0' + idx : idx) : idx}" />
+  </td>
+  <td>
+    <input type="text" name="barcode" class="field spec-brfield" value="123456789" />
+  </td>
   <td><input type="text" name="price" class="field spec-pricefield" value="100.00" /></td>
   <td><span class="js-thumbnailtableview-action">删除</span></td>
 </tr>

@@ -6,48 +6,48 @@
 {% include "pages/_top.html" %}
 
 <div class="temp">
-    <div class="tpl" style="display:none">
-        <div id="tpl_identation" class="identation">  </div>
-        <div id="tpl_tree-node" class="tree-node">
-            <div class="tree-node--line">
-                <span class="tree-node--info">
-                    <span class="icon-collapse collapse"></span>
-                    <span class="icon icon-folder"></span>
-                    <span class="node-name"></span>
-                </span>
-                <span class="tree-node--editor">
-                    <span class="add-sub">
-                        <span class="ion-ios-add icon-blue"></span>
-                        添加子类
-                    </span>
-                    <span class="remove">
-                        <span class="ion-ios-remove icon-blue"></span>
-                        删除
-                    </span>
-                    <span class="edit">
-                        <span class="ion-ios-cog icon-blue"></span>
-                        设置
-                    </span>
-                </span>
-            </div>
-            <div class="tree-node--sub-nodes">
-            </div>
-        </div>
+  <div class="tpl" style="display:none">
+    <div id="tpl_identation" class="identation">  </div>
+    <div id="tpl_tree-node" class="tree-node">
+      <div class="tree-node--line">
+        <span class="tree-node--info">
+          <span class="icon-collapse collapse"></span>
+          <span class="icon icon-folder"></span>
+          <span class="node-name"></span>
+        </span>
+        <span class="tree-node--editor">
+          <span class="add-sub">
+            <span class="ion-ios-add icon-blue"></span>
+            添加子类
+          </span>
+          <span class="remove">
+            <span class="ion-ios-remove icon-blue"></span>
+            删除
+          </span>
+          <span class="edit">
+            <span class="ion-ios-cog icon-blue"></span>
+            设置
+          </span>
+        </span>
+      </div>
+      <div class="tree-node--sub-nodes">
+      </div>
     </div>
+  </div>
 
-    
-    <div class="tree-view">
-        <div class="tree-view--line">
-            <div class="tree-view--info">商品类别</div>
-            <div class="tree-view--editor">
-                <div class="add-sub">
-                    <span class="ion-ios-add icon-blue"></span>
-                    新增类别
-                </div>
-            </div>
+  
+  <div class="tree-view">
+    <div class="tree-view--line">
+      <div class="tree-view--info">商品类别</div>
+      <div class="tree-view--editor">
+        <div class="add-sub">
+          <span class="ion-ios-add icon-blue"></span>
+          新增类别
         </div>
-        <div class="tree-view--nodes"></div>
+      </div>
     </div>
+    <div class="tree-view--nodes"></div>
+  </div>
 </div>
 
 {% endblock %}
@@ -61,9 +61,8 @@
 
 {% block scripts %}
 {{ $.js("/vendor.dll") }}
-<!-- {{ $.js("/commons") }} -->
+{{ $.js("/commons") }}
 {{ $.js("index") }}
-<script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.9.0.js"></script>
 {{ $.js("scripts/treeview")}}
 {% endblock %}
 

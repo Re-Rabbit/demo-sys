@@ -1,3 +1,6 @@
+{% import "tpls/macros.html" as $ %}
+
+
 {% block body %}
 
 <div class="layout-block">
@@ -146,28 +149,34 @@
 
   <div class="section">
     <div class="list-pagination">
-      <div class="pagination">
-        <div class="pagination-item pagination-control">
+      <div class="pagination js-pagination">
+        <div class="pagination-item pagination-control js-pagination-prev">
           <span class="ic ion-ios-arrow-back-outline"></span>
         </div>
         <div class="pagination-item">
           <div class="pagination-curr">
-            2
+            <input name="paginationCurr" type="text" value="2" class="pagination-currfield js-pagination-curr" />
           </div>
         </div>
         <div class="pagination-item pagination-split">
           /
         </div>
         <div class="pagination-item pagination-sum">
-          5
+          <span class="js-pagination-sum">5</span>
         </div>
-        <div class="pagination-item pagination-control">
+        <div class="pagination-item pagination-control js-pagination-next">
           <span class="ic ion-ios-arrow-forward-outline"></span>
         </div>
+
         <div class="pagination-item">
-          <div class="pagination-option">
-            10条 / 页
+          <div class="selectfield js-pagination-selectfield">
+            <div class="pagination-options selectfield-field">
+              <span class="selectfield-placeholder">10条 / 页</span>
+            </div>
+            <div class="selectfield-optionslist pagination-optionslist"></div>
+
           </div>
+
         </div>
       </div>
     </div>
@@ -178,8 +187,8 @@
 
 
 
-{% block modal %}
-
+{% block script %}
+{{ $.js("prod-list") }}
 {% endblock %}
 
 

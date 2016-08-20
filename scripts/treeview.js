@@ -1,3 +1,5 @@
+import $ from 'jquery'
+
 function create_tree_node(n, identation){
      var { name, children } = n
      var tree_node = $('#tpl_tree-node').clone().removeAttr('id')

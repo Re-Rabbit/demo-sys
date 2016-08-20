@@ -49,7 +49,7 @@ class Selectfield {
 
 
   setVal(data) {
-    let { value, $input, $el } = this
+    let { value, $input, $el, trigger } = this
 
     this.value = data
     this.$input.html(data.value)
@@ -58,7 +58,13 @@ class Selectfield {
     this.$el.find(`.selectfield-option[data-id="${data.id}"]`).addClass('active')
 
 
+    trigger('selectfield.export', data)
+
     return this
+  }
+
+  getVal() {
+    return this.value
   }
 
 
@@ -92,7 +98,7 @@ class Selectfield {
         id: id,
         value: $(this).text().trim()
       }
-      console.log(option)
+
       setVal(option)
 
       toggleState()

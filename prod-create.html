@@ -1,3 +1,5 @@
+{% import "tpls/macros.html" as $ %}
+
 {% block body %}
 
 <div class="layout-block">
@@ -18,7 +20,7 @@
                   </div>
                 </div>
                 <div class="grid width--9">
-                  <input name="" type="text" class="field" placeholder="输入商品名称" />
+                  <input name="specName" type="text" class="field" placeholder="输入商品名称" />
                 </div>
               </div>
             </label>
@@ -341,6 +343,11 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+
+{% block script %}
+{{ $.js("prod-create") }}
 {% endblock %}
 
 
