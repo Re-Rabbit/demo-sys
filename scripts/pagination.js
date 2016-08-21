@@ -44,8 +44,8 @@ class Pagination {
   }
 
   setCurr(curr) {
-    this.curr = curr
-    this.$curr.val(curr)
+    this.curr = Math.min(Math.max(1, curr), this.sum)
+    this.$curr.val(this.curr)
     this.trigger('pagination.changed')
     return this
   }
@@ -95,12 +95,12 @@ class Pagination {
 
     $prev.on('click.pagination.prev', function() {
       let { curr, sum } =  getVal()
-      setCurr(Math.max(1, curr - 1))
+      setCurr(curr - 1)
     })
 
     $next.on('click.pagination.next', function() {
       let { curr, sum } =  getVal()
-      setCurr(Math.min(sum, curr + 1))
+      setCurr(curr + 1)
     })
 
     on('pagination.changed', function() {
