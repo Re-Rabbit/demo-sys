@@ -1,0 +1,229 @@
+{% import "tpls/macros.html" as $ %}
+
+
+{% block body %}
+
+<div class="layout-block">
+
+  <div class="section">
+    <div class="category-title">
+      商品类别
+      <div class="category-action js-action-create">
+        <span class="ic ion-md-add"></span>
+        新增类别
+      </div>
+    </div>
+  </div>
+
+
+  <div class="section">
+    <div class="category-tree treeview treeview-depth--0">
+      <div class="treeview-content">
+        <div class="treeview-icon">
+          <span class="ic ion-md-arrow-dropdown"></span>
+        </div>
+        <span class="ic category-ic ion-ios-folder-open-outline"></span>
+        ceeeeeeee
+        <div class="category-actions">
+          <div class="category-action js-action-create">
+            <span class="ic ion-md-add"></span>
+            新增类别
+          </div>
+          <div class="category-action js-action-remove">
+            <span class="ic ion-ios-trash-outline"></span>
+            删除
+          </div>
+          <div class="category-action js-action-update">
+            <span class="ic ion-ios-construct-outline"></span>
+            设置
+          </div>
+        </div>
+      </div>
+      <ul class="treeview-list">
+        <li>
+          <div class="treeview treeview-depth--1">
+            <div class="treeview-content">
+              <div class="treeview-icon">
+                <span class="ic ion-md-arrow-dropdown"></span>
+              </div>
+              <span class="ic category-ic ion-ios-folder-open-outline"></span>
+              123123
+            </div>
+            <ul class="treeview-list">
+              <li>
+                <div class="treeview treeview-depth--2">
+                  <div class="treeview-content">
+                    <span class="ic category-ic ion-ios-folder"></span>
+                    cewcwe
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="treeview treeview-depth--2">
+                  <div class="treeview-content">
+                    <span class="ic category-ic ion-ios-folder"></span>
+                    asdf
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block modal %}
+<div class="modal category-modal">
+  <div class="modal-bg"></div>
+  <div class="modal-main category-modal-main">
+    <div class="modal-header">
+      <div class="modal-close">
+        <span class="ion-ios-close-outline"></span>
+      </div>
+      修改商品类别
+    </div>
+    <div class="modal-footer">
+      <button class="button button-primary js-modal-action-1">确定</button>
+      <button class="button js-modal-close js-modal-action-0">取消</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="category-field">
+
+        <label for="categoryName" class="category-name-field">
+          <div class="row">
+            <div class="grid width--3">
+              <div class="form-label">
+                类别名称
+              </div>
+            </div>
+            <div class="grid width--9">
+              <input name="categoryName" id="categoryName" type="text" class="field" placeholder="输入类别名称" />
+            </div>
+          </div>
+        </label>
+
+        <label for="categoryParent">
+          <div class="row">
+            <div class="grid width--3">
+              <div class="form-label">
+                上级分类
+              </div>
+            </div>
+            <div class="grid width--9">
+              <div class="selectfield js-prodcategory">
+                <div class="field selectfield-field">
+                  <span class="selectfield-placeholder">选择商品类别</span>
+                </div>
+                <div class="selectfield-icon">
+                  <span class="ic ion-ios-arrow-up-outline"></span>
+                </div>
+
+                <div class="selectfield-optionslist">
+
+                  <div class="treeview treeview-depth--0">
+                    <div class="treeview-content">
+                      <div class="treeview-icon">
+                        <span class="ic ion-md-arrow-dropdown"></span>
+                      </div>
+                      ceeeeeeee
+                    </div>
+                    <ul class="treeview-list">
+                      <li>
+                        <div class="treeview treeview-depth--1">
+                          <div class="treeview-content">
+                            <div class="treeview-icon">
+                              <span class="ic ion-md-arrow-dropdown"></span>
+                            </div>
+                            123123
+                          </div>
+                          <ul class="treeview-list">
+                            <li>
+                              <div class="treeview treeview-depth--2">
+                                <div class="treeview-content selectfield-option" data-id="1">
+                                  cewcwe
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="treeview treeview-depth--2">
+                                <div class="treeview-content selectfield-option" data-id="2">
+                                  asdf
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="treeview treeview-depth--1">
+                          <div class="treeview-content">
+                            <div class="treeview-icon">
+                              <span class="ic ion-md-arrow-dropdown"></span>
+                            </div>
+                            123123
+                          </div>
+                          <ul class="treeview-list">
+                            <li>
+                              <div class="treeview treeview-depth--2">
+                                <div class="treeview-content selectfield-option" data-id="3">
+                                  test3
+                                </div>
+                              </div>
+                            </li>
+                            <li>
+                              <div class="treeview treeview-depth--2">
+                                <div class="treeview-content selectfield-option" data-id="4">
+                                  test4
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </label>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal category-alert-modal">
+  <div class="modal-bg"></div>
+  <div class="modal-main category-alert-modal-main">
+    <div class="modal-footer category-alert-modal-footer">
+      <button class="button button-primary js-modal-action-1">确定</button>
+      <button class="button js-modal-close js-modal-action-0">取消</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="category-alert">
+        <span class="ic ion-ios-alert"></span>
+        您是否要删除这项内容
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block script %}
+{{ $.js("prod-category") }}
+{% endblock %}
+
+
+{% extends "pages/_tpl.html" %}
