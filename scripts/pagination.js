@@ -22,7 +22,7 @@ class Pagination {
     this.$size = $el.find('.js-pagination-selectfield')
 
 
-    // selectfield initial.
+    // initial selectfield.
     this.selectfield = Selectfield.of({ $el: this.$size })
       .render(renderPaginationOptionListView(PaginationDefaultOptionsListViewData))
       .setVal(PaginationDefaultOptionsListViewData[size])
