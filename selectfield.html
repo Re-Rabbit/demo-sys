@@ -1,0 +1,25 @@
+{% import "tpls/macros.html" as $ %}
+
+
+{% block body %}
+
+<div class="selectfield js-isprodshelves">
+  <div class="field selectfield-field">
+    <span class="selectfield-placeholder">是否上架商品</span>
+  </div>
+  <div class="selectfield-icon">
+    <span class="ic ion-ios-arrow-up-outline"></span>
+  </div>
+  <div class="selectfield-optionslist"></div>
+</div>
+
+{% endblock %}
+
+
+
+{% block script %}
+{{ $.js("demo-selectfield") }}
+{% endblock %}
+
+
+{% extends "pages/_tpl.html" %}
