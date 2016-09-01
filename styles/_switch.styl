@@ -1,0 +1,44 @@
+.switch
+  pos rela
+  va top
+  dis ib
+  lh 1
+.switch-form
+  dis no
+.switch-placeholder
+  dis ib
+  size 1.25rem
+  bd $bd1
+  cur ptr
+  trans all 0.2s ease-in-out 0s
+  ta cen
+
+  &:hover
+    bdc #898989
+
+  &-checkbox
+    bdrz 4px
+    pad ((1.25rem - 1rem) / 2)
+  &-radio
+    bdrz 50%
+    pad 5.5px
+
+.switch-checked
+  op 0
+  size 1rem
+  lh 1
+  cc #fff
+  va top
+
+.switch-checked-radio
+  dis ib
+  bg #fff
+  size 0.4rem
+  bdrz 50%
+
+.switch.active
+  .switch-placeholder
+    bg $pc
+    bdc $pc
+  .switch-checked
+    op 1
