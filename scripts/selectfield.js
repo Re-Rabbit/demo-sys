@@ -1,5 +1,5 @@
 import $ from 'jquery'
-
+import Collapsible from './collapsible.js'
 
 
 
@@ -67,6 +67,9 @@ class Selectfield {
     return this.value
   }
 
+  getState() {
+    return this.state
+  }
 
   event() {
     let {
@@ -79,15 +82,21 @@ class Selectfield {
       uuid,
       toggleState,
       setVal,
+      getVal,
+      getState,
       trigger,
       on
     } = this
 
     toggleState = toggleState.bind(this)
     setVal = setVal.bind(this)
-
+    getVal = getVal.bind(this)
+    getState = getState.bind(this)
 
     $input.on('click.selectfield.trigger', function() {
+      if(getState() === 2)
+        trigger('selectfield.willclosed', getVal())
+
       toggleState()
     })
 
@@ -107,10 +116,14 @@ class Selectfield {
     $(document).on('click.selectfield.close' + uuid, function(evt) {
 
       // Closed when click out of selectfield.
-      if(!$(evt.target).parents('.selectfield').is($el)
-         && !$(evt.target).is($el))
+      if(!$(evt.target).parents('.selectfield').is($el) &&
+         !$(evt.target).is($el)) {
+
+        if(getState() === 2)
+          trigger('selectfield.willclosed', getVal())
 
         toggleState(2)
+      }
     })
 
 
@@ -152,26 +165,47 @@ export const renderListView = datas => $list => {
 }
 
 
-const SelectfieldTreeViewTpl = (data, depth) => content => `
+const SelectfieldTreeViewTpl = (data, depth) => isRender => `
+<li>
 <div class="treeview treeview-depth--${depth}">
-  <div class="treeview-content" data-id="${data.id}">
+  <div class="treeview-content ${isRender ? '' : 'selectfield-option'}" data-id="${data.id}">
+    ${isRender ? `
     <div class="treeview-icon">
       <span class="ic ion-md-arrow-dropdown"></span>
     </div>
+    ` : ''}
     ${data.value}
   </div>
-  <ul class="treeview-list">
-    ${content}
-  </ul>
+  ${isRender ? `<ul class="treeview-list" data-id="${data.id}"></ul>` : ''}
 </div>
+</li>
 `
 
-export function renderTreeView(datas) {
-  //return _ => datas.map(SelectfieldListViewTpl)
 
-  return _ => (function recur(data, depth) {
-    console.log(data, depth)
-    if(!data.children) return data
-    return data.children.map(n => recur(n, depth + 1))
+export const _renderTreeView = tpl => datas => ($list, callback) => {
+  let $view = $('<div class="treeview-container"></div>')
+
+  ;(function recur(data, depth, pid) {
+    let $target = pid ? $view.find(`.treeview-list[data-id="${pid}"]`) : $view
+
+    if(!data.children || data.children.length === 0) {
+      $target.append(tpl(data, depth)())
+      return
+    }
+
+    $target.append(tpl(data, depth)(true))
+    return data.children.map(n => recur(n, depth + 1 ,data.id))
   })(datas, 0)
+
+  $view.appendTo($list).find('.treeview').toArray().map(n => {
+    let $el = $(n).children('.treeview-list')
+    let $trigger = $(n).children('.treeview-content')
+    return Collapsible.of({ $el: $el, $trigger: $trigger })
+  })
+
+  if(callback && typeof callback === 'function')
+    callback($view)
 }
+
+
+export const renderTreeView = _renderTreeView(SelectfieldTreeViewTpl)

@@ -38,6 +38,10 @@ let unitsListViewData = [
 let modal = Modal.of({ $el: $('.spec-units-modal') })
 let unitsSelectfield = Selectfield.of({ $el: $('.js-units') })
 
+unitsSelectfield.on('selectfield.willclosed', function(evt, data) {
+  console.log(data)
+})
+
 
 const unitsRenderView = datas => ($list, selectfield) => {
   let out = datas.map(SelectfieldListViewTpl).join('')
@@ -105,11 +109,9 @@ let treeViewData = {
   }]
 }
 
-renderTreeView(treeViewData)()
-
 
 let categorySelectfield = Selectfield.of({ $el: $('.js-prodcategory') })
-
+    .render(renderTreeView(treeViewData))
 
 //selectfieldApply($('.selectfield'))
 
@@ -120,6 +122,56 @@ $('.treeview').toArray().map(n => {
   let $el = $(n).children('.treeview-list')
   let $trigger = $(n).children('.treeview-content')
   return Collapsible.of({ $el: $el, $trigger: $trigger })
+})
+
+
+const SpecOptionTpl = (opt) => `
+        <li>
+          <div class="spec-option-item">
+            <div class="row">
+              <div class="grid">
+                <div class="spec-option-itemname">
+                  <a href="#">${opt.name}</a>
+                </div>
+                <div class="spec-option-itemsize">
+                  ${opt.size}
+                </div>
+              </div>
+
+              <div class="grid-last">
+                <div class="spec-option-actions">
+                  <div class="spec-option-action js-specoption-download">
+                    <div class="spec-option-icon">
+                      <span class="ic ion-ios-cloud-download-outline"></span>
+                    </div>
+                    下载
+                  </div>
+
+                  <div class="spec-option-action js-specoption-delete">
+                    <div class="spec-option-icon">
+                      <span class="ic ion-ios-trash-outline"></span>
+                    </div>
+                    删除
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </li>
+`
+
+$('.js-action-upload').on('click', function() {
+  let $tpl = $(SpecOptionTpl({ name: 'test', size: '100000KB' }))
+  $tpl.on('click', '.js-specoption-download', function() {
+    alert('下载')
+  }).on('click', '.js-specoption-delete', function() {
+    alert('删除')
+    $tpl.remove()
+  })
+  $tpl.appendTo('.js-spec-option-container')
+
+  return false
 })
 
 

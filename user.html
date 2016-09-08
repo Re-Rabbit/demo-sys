@@ -1,0 +1,206 @@
+{% import "tpls/macros.html" as $ %}
+
+
+{% block body %}
+
+<div class="layout-block">
+
+  <div class="section section-mb2">
+    <div class="">山东济南成牛电子商务有限公司</div>
+  </div>
+
+  <div class="section section-mb2">
+    <div class="tab row">
+      <div class="tab-title grid active">客户信息</div>
+      <div class="tab-title grid">客户信息</div>
+      <div class="tab-title grid">客户信息</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="title">基本信息</div>
+    <div class="section-body">
+      <table>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>客户编号</div>
+          </td>
+          <td class="user-value">
+            <div>SC132459654</div>
+          </td>
+        </tr>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>客户名称</div>
+          </td>
+          <td class="user-value">
+            <div>成牛</div>
+          </td>
+        </tr>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>客户简称</div>
+          </td>
+          <td class="user-value">
+            <div>上冻济南成牛电子商务有限公司</div>
+          </td>
+        </tr>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>公司网址</div>
+          </td>
+          <td class="user-value">
+            <div>www.chengniu.com</div>
+          </td>
+        </tr>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>注册资金</div>
+          </td>
+          <td class="user-value">
+            <div>100万元</div>
+          </td>
+        </tr>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>所在地区</div>
+          </td>
+          <td class="user-value">
+            <div>山西省太原市万柏林区</div>
+          </td>
+        </tr>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>详细地址</div>
+          </td>
+          <td class="user-value">
+            <div>山西省太原市万柏林区存1单元410</div>
+          </td>
+        </tr>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>三证上传</div>
+          </td>
+          <td class="user-value">
+            <div class="user-uploads">
+              <div class="user-upload">
+                <span class="ic ion-ios-link-outline"></span>
+                营业执照.jpg
+              </div>
+              <div class="user-upload">
+                <span class="ic ion-ios-link-outline"></span>
+                税务登记证.jpg
+              </div>
+              <div class="user-upload">
+                <span class="ic ion-ios-link-outline"></span>
+                组织机构代码证.jpg
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="title">销售信息</div>
+    <div class="section-body">
+      <table>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>客户级别</div>
+          </td>
+          <td class="user-value">
+            <div>重点</div>
+          </td>
+        </tr>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>客户类型</div>
+          </td>
+          <td class="user-value">
+            <div>品牌类大客户</div>
+          </td>
+        </tr>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>客户来源</div>
+          </td>
+          <td class="user-value">
+            <div>推荐</div>
+          </td>
+        </tr>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>从事行业</div>
+          </td>
+          <td class="user-value">
+            <div>IT</div>
+          </td>
+        </tr>
+        <tr class="user-row">
+          <td class="user-label">
+            <div>旗下品牌</div>
+          </td>
+          <td class="user-value">
+            <div>成五</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="title">客户联系人</div>
+    <div class="section-body user-contacts">
+      <table class="">
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>职位</th>
+            <th>电话</th>
+            <th>邮箱</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>王小明</td>
+            <td>采购经理</td>
+            <td>15525019390</td>
+            <td>15525019390@qq.com</td>
+          </tr>
+          <tr>
+            <td>王小明</td>
+            <td>采购经理</td>
+            <td>15525019390</td>
+            <td>15525019390@qq.com</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="title">客户联系人</div>
+    <div class="section-body">
+      <div class="user-people">
+        <div class="user-person">
+          <span class="ic ion-ios-person-outline"></span>
+          蔡京
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+{{ $.js("prod-category") }}
+{% endblock %}
+
+
+{% extends "pages/_tpl.html" %}

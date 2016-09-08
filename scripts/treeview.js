@@ -57,3 +57,65 @@ var node_root = [
 ]
 
 $(()=>render_tree_nodes(node_root, $('.tree-view--nodes')))
+
+
+
+
+const convertTreeToList = data => {
+  let out = []
+
+  ;(function recur(data, path) {
+
+    let path1 = path ? [path, data.id].join('/') : data.id.toString()
+
+    out.push([path1, { id: data.id, value: data.value } ])
+    if(!data.children || data.children.length === 0) return
+    return data.children.map(n => recur(n, path1))
+  })(data)
+
+  return out
+}
+
+const convertListToTree = list => {
+  let out = { children: [] }
+  let cache = {}
+  let fid = findId(list)
+
+  list.sort(sortPath).forEach(n => {
+    let path = allPath(n)
+    let target = path.pop()
+    let targetObj = getData(fid(target))
+    let ref = cache[path.join('/')] || out
+    let _out = Object.assign({}, targetObj, { children: [] })
+    ref.children.push(_out)
+    cache[getPath(n)] = ref.children[ref.children.length - 1]
+  })
+
+  return out.children[0]
+}
+
+const getPath = listItem => {
+  return listItem[0]
+}
+
+const allPath = listItem => {
+  let path = getPath(listItem)
+
+  return path.split('/')
+}
+
+const sortPath = (a, b) => {
+  let i = allPath(a).length
+  let j = allPath(b).length
+
+  return i > j
+}
+
+const getData = listItem => {
+  return listItem[1]
+}
+
+const findId = list => id => {
+  let regex = new RegExp(`${id}$`)
+  return list.find(n => regex.test(getPath(n)))
+}

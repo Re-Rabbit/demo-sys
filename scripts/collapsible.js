@@ -44,15 +44,10 @@ class Collapsible {
 
 
     $trigger.on('click.collapsible', function(evt) {
-
       let state = getState()
-
       if(state === 1) return
-
       setState(1)
-
       $el.stop().slideToggle(speed, _ => setState(state === 0 ? 2 : 0))
-
     })
   }
 }
