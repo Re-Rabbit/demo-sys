@@ -9,7 +9,7 @@ import Modal from './scripts/modal.js'
 let modalBox = Modal.of({ $el: $('.category-modal') })
 let modalAlert = Modal.of({ $el: $('.category-alert-modal') })
 
-let treeViewData = {
+let treeViewData = [{
   id: 1,
   value: 'test1',
   children: [{
@@ -37,11 +37,31 @@ let treeViewData = {
     id: 13,
     value: 'test13'
   }]
-}
+}]
+
+console.log(JSON.stringify(treeViewData))
+
+
+
+const CategorySelectFieldTpl = (data, depth) => isRender => `
+<li>
+<div class="treeview treeview-depth--${depth}">
+  <div class="treeview-content" data-id="${data.id}">
+    ${isRender ? `
+      <div class="treeview-icon">
+      <span class="ic ion-md-arrow-dropdown"></span>
+      </div>
+      ` : ''}
+     <span class="selectfield-option">${data.value}</span>
+  </div>
+  ${isRender ? `<ul class="treeview-list" data-id="${data.id}"></ul>` : ''}
+</div>
+</li>
+`
 
 
 let categorySelectfield = Selectfield.of({ $el: $('.js-prodcategory') })
-    .render(renderTreeView(treeViewData))
+    .render(_renderTreeView(CategorySelectFieldTpl)(treeViewData))
 
 
 const CategoryViewTpl = (data, depth) => isRender => `
@@ -85,7 +105,9 @@ _renderTreeView(CategoryViewTpl)(treeViewData)($('.js-category-view'), function(
   $('.js-action-remove').on('click', function(evt) {
     evt.stopPropagation()
     modalAlert.show()
-    console.log($(this).parents('.category-item').data('id'))
+
+    let id = $(this).parents('.category-item').data('id')
+    console.log(id)
     return false
   })
 

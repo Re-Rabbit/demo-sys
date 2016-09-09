@@ -102,10 +102,10 @@ class Selectfield {
 
     $el.on('click.selectfield.option', '.selectfield-option', function() {
       let id = $(this).data('id')
-
+      let value = $(this).data('value')
       let option = {
         id: id,
-        value: $(this).text().trim()
+        value: value || $(this).text().trim()
       }
 
       setVal(option)
@@ -185,17 +185,21 @@ const SelectfieldTreeViewTpl = (data, depth) => isRender => `
 export const _renderTreeView = tpl => datas => ($list, callback) => {
   let $view = $('<div class="treeview-container"></div>')
 
-  ;(function recur(data, depth, pid) {
-    let $target = pid ? $view.find(`.treeview-list[data-id="${pid}"]`) : $view
+  datas = Array.isArray(datas) ? datas : [datas]
 
-    if(!data.children || data.children.length === 0) {
-      $target.append(tpl(data, depth)())
-      return
-    }
+  datas.forEach(data => {
+    ;(function recur(data, depth, pid) {
+      let $target = pid ? $view.find(`.treeview-list[data-id="${pid}"]`) : $view
 
-    $target.append(tpl(data, depth)(true))
-    return data.children.map(n => recur(n, depth + 1 ,data.id))
-  })(datas, 0)
+      if(!data.children || data.children.length === 0) {
+        $target.append(tpl(data, depth)())
+        return
+      }
+
+      $target.append(tpl(data, depth)(true))
+      return data.children.map(n => recur(n, depth + 1 ,data.id))
+    })(data, 0)
+  })
 
   $view.appendTo($list).find('.treeview').toArray().map(n => {
     let $el = $(n).children('.treeview-list')
@@ -209,3 +213,84 @@ export const _renderTreeView = tpl => datas => ($list, callback) => {
 
 
 export const renderTreeView = _renderTreeView(SelectfieldTreeViewTpl)
+
+
+
+
+import { makeCalendar, makeDP, showDP, showDP1 } from './datepicker.js'
+
+
+const SelectfieldDatePickerDateViewTpl = dp => `
+<div class="datepicker-grid grid width--7-f" data-id="${showDP(dp)}">
+  <div class="datepicker-cell selectfield-option" data-id="${showDP(dp)}" data-value="${showDP(dp)}">${dp.DD}</div>
+</div>
+`
+
+const SelectfieldDatePickerViewTpl = dp => `
+<div class="datepicker">
+  <div class="datepicker-header">请选择日期</div>
+  <div class="datepicker-control-container">
+    <span class="datepicker-yymm">2016年7月</span>
+    <div class="datepicker-control datepicker-control-left datepicker-control-left-1">
+      <span class="ion-md-rewind"></span>
+    </div>
+    <div class="datepicker-control datepicker-control-left datepicker-control-left-2">
+      <span class="ion-md-arrow-dropleft"></span>
+    </div>
+    <div class="datepicker-control datepicker-control-right datepicker-control-right-1">
+      <span class="ion-md-fastforward"></span>
+    </div>
+    <div class="datepicker-control datepicker-control-right datepicker-control-right-2">
+      <span class="ion-md-arrow-dropright"></span>
+    </div>
+  </div>
+
+  <div class="datepicker-body">
+
+    <div class="datepicker-week row">
+      <div class="datepicker-grid grid width--7-f">
+        <div class="datepicker-cell">一</div>
+      </div>
+      <div class="datepicker-grid grid width--7-f">
+        <div class="datepicker-cell">二</div>
+      </div>
+      <div class="datepicker-grid grid width--7-f">
+        <div class="datepicker-cell">三</div>
+      </div>
+      <div class="datepicker-grid grid width--7-f">
+        <div class="datepicker-cell">四</div>
+      </div>
+      <div class="datepicker-grid grid width--7-f">
+        <div class="datepicker-cell">五</div>
+      </div>
+      <div class="datepicker-grid grid width--7-f">
+        <div class="datepicker-cell">六</div>
+      </div>
+      <div class="datepicker-grid grid width--7-f">
+        <div class="datepicker-cell">日</div>
+      </div>
+    </div>
+
+    <div class="datepicker-dates row">
+      ${makeCalendar(dp).map(SelectfieldDatePickerDateViewTpl).join('')}
+    </div>
+  </div>
+
+  <div class="datepicker-footer">
+    <span class="datepicker-action-today">今天</span>
+    <div class="datepicker-action-check">
+      <button class="button button-primary button-small js-datepicker-ok">确定</button>
+    </div>
+  </div>
+</div>
+`
+
+export const renderDatePickerView = date => ($list, sf) => {
+  let dp = makeDP(date)
+  let out = SelectfieldDatePickerViewTpl(dp)
+  $(out)
+    .on('click', '.datepicker-control-left-2', function() {
+      
+    })
+    .appendTo($list)
+}
