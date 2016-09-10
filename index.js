@@ -170,26 +170,5 @@ const renderCale = date => `
 </div>
 `
 
-$('.prevyy').click(_ => {
-  dp = prevYY(dp)
-  $('.cale').html(renderCale(dp))
-  $('.mm').html(showDPWithoutDD(dp))
-})
-$('.prevmm').click(_ => {
-  dp = prevMM(dp)
-  $('.cale').html(renderCale(dp))
-  $('.mm').html(showDPWithoutDD(dp))
-})
-$('.nextmm').click(_ => {
-  dp = nextMM(dp)
-  $('.cale').html(renderCale(dp))
-  $('.mm').html(showDPWithoutDD(dp))
-})
-$('.nextyy').click(_ => {
-  dp = nextYY(dp)
-  $('.cale').html(renderCale(dp))
-  $('.mm').html(showDPWithoutDD(dp))
-})
-
 let calendarSf = Selectfield.of({ $el: $('.js-calendar') })
     .render(renderDatePickerView(new Date()))

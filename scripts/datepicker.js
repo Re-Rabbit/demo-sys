@@ -5,6 +5,15 @@ const prefixZero = value => {
   return len === 1 ? '0' + str : str
 }
 
+const range = (from, to) => {
+  let out = []
+  for(let i = from; i <= to; i++) {
+    out.push(i)
+  }
+
+  return out
+}
+
 const constDateObj = dp => {
   return new Date(showDP(dp))
 }
@@ -44,9 +53,6 @@ const jumpYY = dyy => dp => {
   return Object.assign({}, dp, { YY: dp.YY + dyy, DD: 1 })
 }
 
-const nextYY = jumpYY(1)
-const prevYY = jumpYY(-1)
-
 const jumpMM = dmm => dp => {
   let cmp = dp.MM + dmm
   if(cmp < 1) {
@@ -62,17 +68,10 @@ const jumpMM = dmm => dp => {
   }
 }
 
-const nextMM = jumpMM(1)
-const prevMM = jumpMM(-1)
-
-const range = (from, to) => {
-  let out = []
-  for(let i = from; i <= to; i++) {
-    out.push(i)
-  }
-
-  return out
-}
+export const nextYY = jumpYY(1)
+export const prevYY = jumpYY(-1)
+export const nextMM = jumpMM(1)
+export const prevMM = jumpMM(-1)
 
 export const makeCalendar = dp => {
   //let dp = makeDP(date)
@@ -102,9 +101,10 @@ export const makeCalendar = dp => {
 
 
   let out = []
-      .concat(prevlist)
-      .concat(currlist)
-      .concat(nextlist)
+
+  out.push(prevlist)
+  out.push(currlist)
+  out.push(nextlist)
 
   return out
 }
@@ -116,9 +116,10 @@ export const showDP = dp => {
 }
 
 export const showDP1 = dp => {
-  let str = showDP(dp)
-  let idx = str.lastIndexOf('-')
-  return str.substr(0, idx)
+  let str = showDP(dp).split('-')
+  return `${str[0]}年${str[1]}月`
+  //let idx = str.lastIndexOf('-')
+  //return str.substr(0, idx)
 }
 
 
@@ -138,3 +139,12 @@ export const makeDP = date => {
     //isCurrMM: false
   }
 }
+
+
+export const isSameDP = (dp1, dp2) => {
+  return dp1.YY === dp2.YY &&
+    dp1.MM === dp2.MM &&
+    dp1.DD === dp2.DD
+}
+
+export const isTodayDP = dp => isSameDP(dp, makeDP(new Date()))

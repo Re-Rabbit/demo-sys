@@ -57,7 +57,6 @@ class Selectfield {
     this.$el.find('.selectfield-option').removeClass('active')
     this.$el.find(`.selectfield-option[data-id="${data.id}"]`).addClass('active')
 
-
     trigger('selectfield.export', data)
 
     return this
@@ -217,12 +216,23 @@ export const renderTreeView = _renderTreeView(SelectfieldTreeViewTpl)
 
 
 
-import { makeCalendar, makeDP, showDP, showDP1 } from './datepicker.js'
+import {
+  makeCalendar,
+  makeDP,
+  showDP,
+  showDP1,
+  prevMM,
+  nextMM,
+  prevYY,
+  nextYY,
+  isSameDP,
+  isTodayDP
+} from './datepicker.js'
 
 
-const SelectfieldDatePickerDateViewTpl = dp => `
-<div class="datepicker-grid grid width--7-f" data-id="${showDP(dp)}">
-  <div class="datepicker-cell selectfield-option" data-id="${showDP(dp)}" data-value="${showDP(dp)}">${dp.DD}</div>
+const SelectfieldDatePickerDateViewTpl = (isCurrent, currdp) => dp => `
+<div class="datepicker-grid grid width--7-f">
+  <div class="datepicker-cell datepicker-date ${isCurrent ? '': 'nomm'} ${isSameDP(currdp, dp) ? 'active' : ''} ${isTodayDP(dp) ? 'today' : ''}" data-id="${showDP(dp)}">${dp.DD}</div>
 </div>
 `
 
@@ -231,16 +241,16 @@ const SelectfieldDatePickerViewTpl = dp => `
   <div class="datepicker-header">请选择日期</div>
   <div class="datepicker-control-container">
     <span class="datepicker-yymm">2016年7月</span>
-    <div class="datepicker-control datepicker-control-left datepicker-control-left-1">
+    <div class="datepicker-control datepicker-control-left datepicker-control-prevyy">
       <span class="ion-md-rewind"></span>
     </div>
-    <div class="datepicker-control datepicker-control-left datepicker-control-left-2">
+    <div class="datepicker-control datepicker-control-left datepicker-control-left-2 datepicker-control-prevmm">
       <span class="ion-md-arrow-dropleft"></span>
     </div>
-    <div class="datepicker-control datepicker-control-right datepicker-control-right-1">
+    <div class="datepicker-control datepicker-control-right datepicker-control-nextmm">
       <span class="ion-md-fastforward"></span>
     </div>
-    <div class="datepicker-control datepicker-control-right datepicker-control-right-2">
+    <div class="datepicker-control datepicker-control-right datepicker-control-right-2 datepicker-control-nextyy">
       <span class="ion-md-arrow-dropright"></span>
     </div>
   </div>
@@ -271,9 +281,7 @@ const SelectfieldDatePickerViewTpl = dp => `
       </div>
     </div>
 
-    <div class="datepicker-dates row">
-      ${makeCalendar(dp).map(SelectfieldDatePickerDateViewTpl).join('')}
-    </div>
+    <div class="datepicker-dates row"></div>
   </div>
 
   <div class="datepicker-footer">
@@ -287,10 +295,66 @@ const SelectfieldDatePickerViewTpl = dp => `
 
 export const renderDatePickerView = date => ($list, sf) => {
   let dp = makeDP(date)
-  let out = SelectfieldDatePickerViewTpl(dp)
-  $(out)
-    .on('click', '.datepicker-control-left-2', function() {
-      
+  let $out = $(SelectfieldDatePickerViewTpl(dp))
+  let $dpbody = $out.find('.datepicker-dates')
+  let $dptitle = $out.find('.datepicker-yymm')
+  let $dpheader = $out.find('.datepicker-header')
+
+  $out
+    .on('datepicker.makedates', function(evt, dp) {
+      let [prev, curr, next] = makeCalendar(dp)
+      let dom = ''
+      dom += prev.map(SelectfieldDatePickerDateViewTpl(false, dp)).join('')
+      dom += curr.map(SelectfieldDatePickerDateViewTpl(true, dp)).join('')
+      dom += next.map(SelectfieldDatePickerDateViewTpl(false, dp)).join('')
+      $dpbody.html(dom)
+      $dptitle.html(showDP1(dp))
     })
+    .on('click', '.datepicker-control-prevmm', function() {
+      dp = prevMM(dp)
+      $out.trigger('datepicker.makedates', dp)
+    })
+    .on('click', '.datepicker-control-nextmm', function() {
+      dp = nextMM(dp)
+      $out.trigger('datepicker.makedates', dp)
+    })
+    .on('click', '.datepicker-control-prevyy', function() {
+      dp = prevYY(dp)
+      $out.trigger('datepicker.makedates', dp)
+    })
+    .on('click', '.datepicker-control-nextyy', function() {
+      dp = nextYY(dp)
+      $out.trigger('datepicker.makedates', dp)
+    })
+    .on('click', '.datepicker-date', function(evt) {
+      if(!$(this).hasClass('nomm')) {
+        $out.find('.datepicker-date').removeClass('active')
+        $(this).addClass('active')
+      } else {
+        let date = new Date($(this).data('id'))
+        dp = makeDP(date)
+        $out.trigger('datepicker.makedates', dp)
+      }
+    })
+    .on('click', '.datepicker-dates', function(evt) {
+      evt.stopPropagation()
+    })
+    .on('click', '.js-datepicker-ok', function() {
+      let date = $out.find('.datepicker-date.active').data('id')
+      if(date) {
+        dp = makeDP(new Date(date))
+        sf.setVal({ id: showDP(dp), value: showDP(dp) })
+      }
+      sf.toggleState()
+    })
+    .on('click', '.datepicker-action-today', function() {
+      dp = makeDP(new Date())
+      $out.trigger('datepicker.makedates', dp)
+    })
+    .trigger('datepicker.makedates', dp)
     .appendTo($list)
+
+  sf.on('selectfield.export', function(evt, data) {
+    $dpheader.text(data.value)
+  })
 }
