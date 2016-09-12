@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
 class Modal {
-  constructor({ $el }) {
+  constructor({ $el, action1Handle }) {
     this.$el = $el
     //this.$trigger = $trigger
 
@@ -18,14 +18,17 @@ class Modal {
     this.$bg = $el.find('.modal-bg')
     this.$main = $el.find('.modal-main')
     this.$close = $el.find('.modal-close, .js-modal-close, .js-modal-action-0')
+    this.actionHandle1 = []
 
     this.trigger = $el.trigger.bind($el)
     this.on = $el.on.bind($el)
     this.event()
   }
 
-  show() {
+  show(handle) {
     let { $el, timer } = this
+
+    if(handle) this.handle = handle
 
     $el.css('display', 'block')
 
@@ -43,8 +46,18 @@ class Modal {
     clearTimeout(timer)
     timer = setTimeout(_ => {
       $el.css('display', 'none')
+      this.handle = null
     }, 290)
   }
+
+  findField(id) {
+    return this.$el.find('#' + id)
+  }
+
+  getHandle(num, id) {
+    return this.handle
+  }
+
 
   event() {
 
@@ -52,14 +65,19 @@ class Modal {
       $el,
       $close,
       hide,
-      trigger
+      trigger,
+      getHandle
     } = this
 
+    let self = this
     hide = hide.bind(this)
+    getHandle = getHandle.bind(this)
 
     $close.on('click.modal.close', hide)
 
     $el.on('click', '.js-modal-action-1', function() {
+      let handle = getHandle()
+      handle && handle(self)
       trigger('modal.action1')
     })
     $el.on('click', '.js-modal-action-2', function() {

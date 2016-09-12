@@ -14,6 +14,9 @@
   td
     &:nth-child(1)
       bg $g1
+      w 16px
+    &:nth-child(2)
+      w 80px
     &:nth-child(3)
       ta l
     &:nth-child(4)
@@ -40,6 +43,40 @@
 
   bd $bd
   bdt 0
+
+.order-store-statisticlabel
+  ta r
+  pr 1rem
+
+.order-store-contact
+  cc $g4
+  cur ptr
+  .ic
+    cc $pc
+
+.order-store-totallabel
+  pt 1rem
+
+.order-store-otherlabel
+  pt 0.3rem
+
+.order-store-total
+  fz 2rem
+  cc $pc
+  dis ib
+
+.order-store-statisticlabel-native
+  mt -2rem
+
+.order-store-other
+  bd 0
+  w 100%
+  cc $g4
+  fz 1rem
+  pad 0.25rem 0.5rem
+  td underline
+
+
 
 
 /// 新增仓库 按钮
@@ -81,10 +118,20 @@
   dis ib
   w 200px
 
+  &.active
+    bg #fff
+    bd 1px solid $pc
+
+  .field
+    bd 0
+    shadow initial
+    ta cen
+
 .order-store-selectfield-field
   //pr 0
-  bdc a0
+  //bdc a0
   cc $cc
+  pad 0
   .selectfield-placeholder
     cc $cc
   &:hover
@@ -127,3 +174,22 @@
   va top
 
 
+/// 仓库 表格 备注
+.order-store-notecreate
+  cc $pc
+
+
+
+
+/// 仓库 联系人 弹出框
+
+.order-store-contact-field
+  pad 2rem
+  pt 4rem
+
+  label
+    dis bl
+    mb 2rem
+
+.order-store-contact-modal
+  modal-size 500px 400px

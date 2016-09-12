@@ -247,10 +247,10 @@ const SelectfieldDatePickerViewTpl = dp => `
     <div class="datepicker-control datepicker-control-left datepicker-control-left-2 datepicker-control-prevmm">
       <span class="ion-md-arrow-dropleft"></span>
     </div>
-    <div class="datepicker-control datepicker-control-right datepicker-control-nextmm">
+    <div class="datepicker-control datepicker-control-right datepicker-control-nextyy">
       <span class="ion-md-fastforward"></span>
     </div>
-    <div class="datepicker-control datepicker-control-right datepicker-control-right-2 datepicker-control-nextyy">
+    <div class="datepicker-control datepicker-control-right datepicker-control-right-2 datepicker-control-nextmm">
       <span class="ion-md-arrow-dropright"></span>
     </div>
   </div>
@@ -354,6 +354,7 @@ export const renderDatePickerView = date => ($list, sf) => {
     .trigger('datepicker.makedates', dp)
     .appendTo($list)
 
+  sf.setVal({ id: showDP(dp), value: showDP(dp) })
   sf.on('selectfield.export', function(evt, data) {
     $dpheader.text(data.value)
   })
