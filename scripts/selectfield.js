@@ -104,7 +104,7 @@ class Selectfield {
       let value = $(this).data('value')
       let option = {
         id: id,
-        value: value || $(this).text().trim()
+        value: value || $(this).html()
       }
 
       setVal(option)

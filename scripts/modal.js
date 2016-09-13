@@ -18,7 +18,6 @@ class Modal {
     this.$bg = $el.find('.modal-bg')
     this.$main = $el.find('.modal-main')
     this.$close = $el.find('.modal-close, .js-modal-close, .js-modal-action-0')
-    this.actionHandle1 = []
 
     this.trigger = $el.trigger.bind($el)
     this.on = $el.on.bind($el)
@@ -81,15 +80,23 @@ class Modal {
       trigger('modal.action1')
     })
     $el.on('click', '.js-modal-action-2', function() {
+      let handle = getHandle()
+      handle && handle(self)
       trigger('modal.action2')
     })
     $el.on('click', '.js-modal-action-3', function() {
+      let handle = getHandle()
+      handle && handle(self)
       trigger('modal.action3')
     })
     $el.on('click', '.js-modal-action-4', function() {
+      let handle = getHandle()
+      handle && handle(self)
       trigger('modal.action4')
     })
     $el.on('click', '.js-modal-action-5', function() {
+      let handle = getHandle()
+      handle && handle(self)
       trigger('modal.action5')
     })
   }
