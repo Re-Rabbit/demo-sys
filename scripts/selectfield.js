@@ -4,12 +4,13 @@ import Collapsible from './collapsible.js'
 
 
 class Selectfield {
-  constructor({ $el, speed = 'fast', uuid = 1, init = { id: 0, value: '' }, placeholder = '' }) {
+  constructor({ $el, speed = 'fast', uuid = 1, init = { id: 0, value: '' }, placeholder = '' ,datas = [] }) {
     this.$el = $el
     this.speed = speed
     this.uuid = uuid
     this.placeholder = placeholder
     this.value = init
+    this.datas = datas
 
     this.state = 1  // 1.close 2.open
 
@@ -79,6 +80,7 @@ class Selectfield {
       speed,
       value,
       uuid,
+      datas,
       toggleState,
       setVal,
       getVal,
@@ -107,7 +109,11 @@ class Selectfield {
         value: value || $(this).html()
       }
 
-      setVal(option)
+      if(datas.length !== 0) {
+        setVal(datas.find(data => data.id === id))
+      } else {
+        setVal(option)
+      }
 
       toggleState()
     })

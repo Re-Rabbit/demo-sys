@@ -2,34 +2,29 @@ import $ from 'jquery'
 
 class AutoComplete {
 
-  static initdatas = []
-
-  constructor({ $el, datas = [], init }) {
-    this.$el = $el
+  constructor({ $el, datas = [], init, tpl }) {
+    this.$el   = $el
     this.datas = datas
-
+    this.tpl   = tpl
     this.value = init // { id: 0, value: 0 }
     this.matchedList = []
     this.cache = {}
-    this.uuid = 'autocomplete' + Date.now()
+    this.uuid  = 'autocomplete' + Date.now()
     this.state = 1 // 1. close 2.open
 
     this.init()
   }
 
   init() {
-    this.$field = this.$el.find('.autocomplete-field')
-    this.$list  = this.$el.find('.autocomplete-list')
-
-    if(AutoComplete.initdatas.length) {
-      let inits  = AutoComplete.initdatas
-      this.datas = inits.concat(this.datas)
-    }
-    if(!this.value) this.value = this.datas[0]
 
     this.trigger = this.$el.trigger.bind(this.$el)
     this.off     = this.$el.off.bind(this.$el)
     this.on      = this.$el.on.bind(this.$el)
+
+    this.$field = this.$el.find('.autocomplete-field')
+    this.$list  = this.$el.find('.autocomplete-list')
+
+    if(!this.value) this.value = this.datas[0]
 
     this.render(this.datas)
     this.setVal()
@@ -106,7 +101,7 @@ class AutoComplete {
           render(datas)
         }
         toggleState(2)
-      }, 100)
+      }, 200)
     })
   }
 
@@ -152,6 +147,8 @@ class AutoComplete {
 
   render(list) {
     let { $list, setVal, value } = this
+    let tpl = this.tpl || AutoComplete.tpl
+    //let tpl = AutoComplete.tpl
 
     setVal = setVal.bind(this)
 
@@ -162,7 +159,7 @@ class AutoComplete {
     }
 
     list.forEach(data => {
-      $(AutoComplete.tpl(data))
+      $(tpl(data))
         .on('click', function() {
           setVal(data)
         })
@@ -184,13 +181,9 @@ class AutoComplete {
   static emptyTpl() {
     return `
     <div class="selectfield-option selectfield-dd autocomplete-listitem">
-      未找到仓库
+      未匹配到数据
     </div>
 `
-  }
-
-  static initDatas(datas) {
-    AutoComplete.initdatas = datas
   }
 
   static of(opts) {

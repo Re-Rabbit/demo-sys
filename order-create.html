@@ -66,176 +66,7 @@
 
 
   <div class="section">
-    <div class="section-body js-order-stores-container">
-
-      <div class="js-order-stores">
-        <div class="order-store">
-
-          <div class="order-store-header">
-
-            <div class="selectfield autocomplete order-store-selectfield js-storeselectfield">
-              <div class="selectfield-field order-store-selectfield-field">
-                <input name="selectstore" type="text" class="field autocomplete-field" placeholder="选择仓库" />
-              </div>
-              <div class="selectfield-optionslist order-store-selectfield-orderlist autocomplete-list">
-
-              </div>
-            </div>
-
-            <div class="order-store-close js-order-store-removerow">
-              <span class="ic ion-ios-close-outline"></span>
-            </div>
-          </div>
-
-          <div class="order-store-table">
-            <table>
-              <thead>
-                <tr>
-                  <th></th>
-                  <th></th>
-                  <th>商品</th>
-                  <th>数量</th>
-                  <th>单位</th>
-                  <th>单价</th>
-                  <th>小计</th>
-                  <th>备注</th>
-                </tr>
-              </thead>
-              <tbody class="js-order-store-goods">
-                <tr class="js-order-store-goods-tpl">
-                  <td>1</td>
-                  <td>
-                    <div class="">
-                      <div class="order-store-operation js-store-action-createrow">
-                        <span class="ic ion-ios-add"></span>
-                      </div>
-                      <div class="order-store-operation js-store-action-removerow">
-                        <span class="ic ion-ios-remove"></span>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="order-store-prod">
-                      <div class="order-store-prodpic">
-                        <img alt="" src="/images/pic.png" />
-                      </div>
-                      <div class="order-store-proddetail">
-                        PC1545 标准箱 【规格1：100x200x300】
-                      </div>
-                    </div>
-                  </td>
-                  <td>10,000</td>
-                  <td>个</td>
-                  <td>1.00</td>
-                  <td>100.00</td>
-                  <td>
-                    <div class="order-store-note">
-                      <div class="order-store-notecreate js-order-store-note">
-                        添加
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="order-store-statistics">
-            <div class="row">
-              <div class="grid width--5">
-                <div class="form-grid">
-                  <label for="">
-                    <div class="row">
-                      <div class="grid width--3">
-                        <div class="form-label">交货日期</div>
-                      </div>
-                      <div class="grid width--9">
-
-                        <div class="selectfield js-calendar">
-                          <div class="field selectfield-field datepicker-field">
-                            <span class="selectfield-placeholder">请选择日期</span>
-                          </div>
-                          <div class="selectfield-icon">
-                            <span class="ic ion-ios-arrow-up-outline"></span>
-                          </div>
-                          <div class="selectfield-optionslist datepicker-optionslist"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="grid width--5">
-                <div class="form-grid">
-                  <label for="">
-                    <div class="row">
-                      <div class="grid width--3">
-                        <div class="order-store-statisticlabel">收获地址</div>
-                      </div>
-                      <div class="grid width--9">
-                        <div class="order-store-address">
-                          华北仓库（山西省太原市万柏林区）
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-
-                  <label for="">
-                    <div class="row">
-                      <div class="grid width--3">
-                        <div class="order-store-statisticlabel">&nbsp;</div>
-                      </div>
-                      <div class="grid width--9">
-                        <div class="order-store-contact">
-                          <span class="ic ion-md-clipboard"></span>
-                          王小明 15515551555
-                        </div>
-                      </div>
-                    </div>
-                  </label>
-                </div>
-              </div>
-              <div class="grid width--7">
-                <div class="form-grid">
-
-                  <label for="">
-                    <div class="row">
-                      <div class="grid width--9">
-                        <div class="order-store-totallabel order-store-statisticlabel">产品合计</div>
-                      </div>
-                      <div class="grid width--3">
-                        <div class="order-store-total">1,520.99</div>
-                      </div>
-                    </div>
-                  </label>
-
-                  <label for="">
-                    <div class="row">
-                      <div class="grid width--9">
-                        <div class="order-store-statisticlabel">其他</div>
-                      </div>
-                      <div class="grid width--3">
-                        <div class="order-store-other">0.00</div>
-                      </div>
-                    </div>
-                  </label>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="js-order-action-create order-create-btn">
-        <span class="ic ion-ios-add"></span>
-        新增仓库
-      </div>
-    </div>
+    <div class="section-body js-order-tables-container"></div>
   </div>
 
 
@@ -243,15 +74,22 @@
     <div class="title">订单备注</div>
 
     <div class="section-body">
-      <textarea class="field areafield" id="" name="" rows="10"></textarea>
+      <textarea class="field areafield js-order-note" id="" name="" rows="10"></textarea>
     </div>
   </div>
 
 
   <div class="section">
-    <div class="spec-submitbtns">
-      <button class="button button-primary js-order-action-submit">提交</button>
-      <button class="button js-order-action-cancle">取消</button>
+    <div class="row">
+      <div class="grid width--6">
+        订单总额 <span class="order-total js-order-total">0.00</span>
+      </div>
+      <div class="grid width--6">
+        <div class="spec-submitbtns">
+          <button class="button button-primary js-order-action-submit">提交</button>
+          <button class="button js-order-action-cancle">取消</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -318,7 +156,7 @@
       <div class="modal-close">
         <span class="ion-ios-close-outline"></span>
       </div>
-      新增单位
+      添加商品备注
     </div>
     <div class="modal-footer">
       <button class="button button-primary js-modal-action-1">确定</button>
