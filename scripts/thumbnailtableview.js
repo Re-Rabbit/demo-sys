@@ -73,13 +73,13 @@ const ThumbnailTableViewTbodyRowTpl = (row, idx) => `
     </td>
   `)}
   <td>
-    ZH2829${idx < 100 ? '0' + (idx < 10 ? '0' + idx : idx) : idx}
+    <span>ZH2829${idx < 100 ? '0' + (idx < 10 ? '0' + idx : idx) : idx}</span>
     <input type="hidden" name="code" value="ZH2829${idx < 100 ? '0' + (idx < 10 ? '0' + idx : idx) : idx}" />
   </td>
   <td>
-    <input type="text" name="barcode" class="field spec-brfield" value="123456789" />
+    <input type="text" name="barcode" class="field spec-brfield" value="${row.barcode || '123456789'}" />
   </td>
-  <td><input type="text" name="price" class="field spec-pricefield" value="100.00" /></td>
+  <td><input type="text" name="price" class="field spec-pricefield" value="${row.price || '100.00'}" /></td>
   <td><span class="js-thumbnailtableview-action">删除</span></td>
 </tr>
 `

@@ -2,6 +2,7 @@ import $ from 'jquery'
 import Selectfield, { selectfieldApply, renderListView, renderTreeView, SelectfieldListViewTpl, renderDatePickerView } from './scripts/selectfield.js'
 
 import Table from './scripts/order-create-table.js'
+import { Prod, Store } from './scripts/order-create-struct.js'
 
 
 const tpl = _ => `
@@ -15,66 +16,6 @@ const tpl = _ => `
 </div>
 </div>
 `
-
-
-class Prod {
-  constructor(opts) {
-
-    let {
-      id,
-      pic,
-      spec,
-      unit,
-      price,
-      count,
-    } = opts
-
-    this.id    = id
-    this.pic   = pic
-    this.spec  = spec
-    this.unit  = unit
-    this.price = price
-    this.count = count || 0
-
-    this.value = Prod.tpl(this)
-  }
-
-  static tpl(prod) {
-    let tpl = prod => `
-<div class="order-store-prod">
-  <div class="order-store-prodpic">
-    <img alt="" src="${prod.pic}" />
-  </div>
-  <div class="order-store-proddetail">
-    ${prod.spec}
-  </div>
-</div>
-`
-    return tpl(prod)
-  }
-
-  static of(opts) {
-    return new Prod(opts)
-  }
-}
-
-
-class Store {
-  constructor(opts) {
-    let { id, name, user, phone, addr } = opts
-    this.id    = id
-    this.name  = name
-    this.user  = user
-    this.phone = phone
-    this.addr  = addr
-  }
-
-  static of(opts) {
-    return new Store(opts)
-  }
-}
-
-
 
 /**
  * 仓库数据 容器
@@ -117,7 +58,7 @@ class Container {
   computPrice() {
     let sum = this.tables.reduce((acc, curr) => {
       return acc + parseFloat(curr.other) + curr.rows.reduce((a2, c2) => {
-        return a2 + parseFloat(c2.count) * parseFloat(c2.value.price)
+        return a2 + parseFloat(c2.count) * parseFloat(c2.prod.value.price)
       }, 0)
     }, 0)
     this.$total.text(sum.toFixed(2))
@@ -282,7 +223,7 @@ function setVal() {
       price: 2.10,
       note: '',
       pic: '/images/pic.png',
-      spec: 'PC1545 标准箱 【规格1：100x200x300】'
+      spec: 'PC8888 标准箱 【规格2：100x200x300】'
     }
   ]
 

@@ -8,18 +8,18 @@ const ProdSpecViewTpl = id => `
 
 
 export default class ProdSpecView {
-  constructor({ $el, row = 3, enabled = false }) {
+  constructor({ $el, row = 3, enabled = false, datas = [] }) {
     this.$el = $el
     this.row = row
     this.enabled = enabled
-
+    this.datas = datas
     this.datastate = {}
 
     this.init()
   }
 
-  createRow(len) {
-    let id = Date.now()
+  createRow(len, ids, name, labels) {
+    let id = ids || Date.now()
 
     let $row = $(ProdSpecViewTpl(id)).appendTo(this.$body)
 
@@ -38,7 +38,7 @@ export default class ProdSpecView {
 
     let data = {
       $row: $row,
-      row: ProdSpecRow.of({ $el: $row, name: '规格' + replace })
+      row: ProdSpecRow.of({ $el: $row, name: name || '规格' + replace, datas: labels })
     }
 
     this.datastate.rows[id] = data
@@ -70,7 +70,13 @@ export default class ProdSpecView {
 
     this.datastate.rows = {}
     this.datastate.checked = enabled
-    createRow.bind(this)(0)
+    if(this.datas.length === 0) {
+      createRow.bind(this)(0)
+    } else {
+      this.datas.forEach(row => {
+        createRow.bind(this)(null, row.id, row.name, row.labels)
+      })
+    }
 
     this.on = $el.on.bind($el)
     this.trigger = $el.trigger.bind($el)

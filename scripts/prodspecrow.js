@@ -32,10 +32,10 @@ export const ProdSpecRowTpl = name => `
  */
 
 export default class ProdSpecRow {
-  constructor({ $el, name = '' }) {
+  constructor({ $el, name = '', datas = [] }) {
     this.$el = $el
     this.name = name
-
+    this.datas = datas
     this.datastate = {}
     this.init()
   }
@@ -44,7 +44,7 @@ export default class ProdSpecRow {
     let { $el, datastate, name } = this
     $el.append(ProdSpecRowTpl(name))
 
-    this.lf = LabelField.of({ $el: $el.find('.js-prodspecrow-labelfield') })
+    this.lf = LabelField.of({ $el: $el.find('.js-prodspecrow-labelfield'), datas: this.datas })
 
     this.$close = $el.find('.js-prodspecrow-close')
     this.$input = $el.find('.js-prodspecrow-name')

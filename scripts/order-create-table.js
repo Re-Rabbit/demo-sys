@@ -147,7 +147,7 @@ class Table {
     this.date   = typeof date === 'string' ? new Date(date) : date
     this.other  = other
     this.rows   = rows.map(row => Row.of(Object.assign({}, { prods: prods }, row)))
-    this.value  = Store.of(value) || stores[0]
+    this.value  = value ? Store.of(value) : stores[0]
     this.user   = user
     this.phone  = phone
     this.$el    = $(tpl(this))
@@ -246,7 +246,7 @@ class Table {
 
   computPrice() {
     let sum = this.rows.reduce((acc, curr) => {
-      return acc + parseFloat(curr.count) * parseFloat(curr.value.price)
+      return acc + parseFloat(curr.count) * parseFloat(curr.prod.value.price)
     }, 0)
     let handle = this.getHandle()
     this.$el.find('.order-store-total').text(sum.toFixed(2))

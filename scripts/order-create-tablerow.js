@@ -19,7 +19,10 @@ let tpl = row => `
   </td>
   <td>
     <div class="selectfield order-store-prod js-order-store-prodselectfiled">
-      <div class="field selectfield-field order-store-prod-field autocomplete-field"></div>
+      <div class="order-store-prod-container">
+         <input class="autocomplete-field order-store-prod-field js-order-store-prod-field" type="text" />
+         <div class="js-order-store-actarget"></div>
+      </div>
       <div class="selectfield-optionslist order-store-prod-list autocomplete-list"></div>
     </div>
   </td>
@@ -41,7 +44,15 @@ let tpl = row => `
 </tr>
 `
 
-//<div class="field selectfield-field order-store-prod-field autocomplete-field"></div>
+//<div class="field selectfield-field order-store-prod-field"><input class="autocomplete-field" type="text" /></div>
+//
+
+
+let actpl = data => `
+<div class="selectfield-option selectfield-dd autocomplete-listitem" data-id="${data.id}">
+  ${data.value}
+</div>
+`
 
 
 /**
@@ -53,7 +64,7 @@ class Row {
     this.prods = prods
     this.count = count
     this.note  = note
-    this.value = Prod.of(value) || prods[0]
+    this.value = value ? Prod.of(value) : prods[0]
     this.$el   = $(tpl(this))
     this.init()
   }
@@ -63,15 +74,17 @@ class Row {
     this.off     = this.$el.off.bind(this.$el)
     this.on      = this.$el.on.bind(this.$el)
 
-    this.$count = this.$el.find('.js-order-store-prodcount')
-    this.$price = this.$el.find('.js-order-store-prodprice')
-    this.$unit  = this.$el.find('.js-order-store-produnit')
-    this.$sum   = this.$el.find('.js-order-store-prodsum')
+    this.$count   = this.$el.find('.js-order-store-prodcount')
+    this.$price   = this.$el.find('.js-order-store-prodprice')
+    this.$unit    = this.$el.find('.js-order-store-produnit')
+    this.$sum     = this.$el.find('.js-order-store-prodsum')
+    this.$ac      = this.$el.find('.js-order-store-actarget')
+    this.$acfield = this.$el.find('.js-order-store-prod-field')
 
     this
       .setCount(this.count)
-      .initSelectfield()
-    //.initAutoComplete()
+    //.initSelectfield()
+      .initAutoComplete()
       .initModal()
       .setNote(this.note)
 
@@ -129,13 +142,13 @@ class Row {
   initSelectfield() {
     let setCount    = this.setCount.bind(this)
     let computPrice = this.computPrice.bind(this)
-    this.sf  = Selectfield.of({
+    this.prod  = Selectfield.of({
       $el: this.$el.find('.js-order-store-prodselectfiled'),
       datas: this.prods
     })
-    this.sf.render(renderListView(this.prods))
-    this.sf.setVal(this.value)
-    this.sf.on('selectfield.export', function(evt, data) {
+    this.prod.render(renderListView(this.prods))
+    this.prod.setVal(this.value)
+    this.prod.on('selectfield.export', function(evt, data) {
       setCount(1).computPrice()
     })
     return this
@@ -144,21 +157,42 @@ class Row {
   initAutoComplete() {
     let setCount    = this.setCount.bind(this)
     let computPrice = this.computPrice.bind(this)
-    this.ac  = AutoComplete.of({
+    let $ac = this.$ac
+    let $acfield = this.$acfield
+    let prod = this.prod  = AutoComplete.of({
       $el: this.$el.find('.js-order-store-prodselectfiled'),
       datas: this.prods,
-      tpl: SelectfieldListViewTpl
+      tpl: actpl,
+      disableDirectionKey: true,
+      renderHandle: (val, ac) => {
+        if(val) {
+          $acfield.val('')
+          $(val).appendTo(this.$ac.empty())
+        }
+        $ac.show()
+        $acfield.removeClass('active')
+      }
     })
-    this.ac.setVal(this.value)
-    this.ac.on('selectfield.export', function(evt, data) {
+    this.prod.setVal(this.value)
+    this.prod.on('autocomplete.export', function(evt, data) {
       setCount(1).computPrice()
+    })
+    this.prod.on('autocomplete.focusout', function() {
+      $acfield.removeClass('active')
+      $ac.show()
+    })
+
+    $ac.on('click', function() {
+      prod.render(prod.datas)
+      $ac.hide()
+      $acfield.val('').addClass('active').focus()
     })
 
     return this
   }
 
   computPrice(cb) {
-    let { unit, price } = this.sf.value
+    let { unit, price } = this.prod.value
     let sum = parseFloat(price) * parseFloat(this.count)
     this.$unit.text(unit)
     this.$price.text(price)
@@ -193,11 +227,11 @@ class Row {
     let getRemoveHandle = this.getRemoveHandle.bind(this)
     let getCreateHandle = this.getCreateHandle.bind(this)
 
-    this.on('click.store.removerow', '.js-store-action-removerow', function() {
+    this.on('click.store.removerow', '.js-store-prodtion-removerow', function() {
       let removeHandle = getRemoveHandle()
       removeHandle && removeHandle(self, $el.remove.bind($el))
     })
-    this.on('click.store.createrow', '.js-store-action-createrow', function() {
+    this.on('click.store.createrow', '.js-store-prodtion-createrow', function() {
       let createHandle = getCreateHandle()
       createHandle && createHandle()
     })

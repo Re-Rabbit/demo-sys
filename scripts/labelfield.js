@@ -40,9 +40,9 @@ const LabelFieldMemoTpl = data => `
  */
 
 class LabelField {
-  constructor({ $el }) {
+  constructor({ $el, datas = [] }) {
     this.$el = $el
-
+    this.datas = datas
     this.datastate = {}
     this.memorizelist = []
 
@@ -60,8 +60,15 @@ class LabelField {
 
     this.trigger = $el.trigger.bind($el)
     this.on = $el.on.bind($el)
-
     this.event()
+
+    if(this.datas.length) {
+      this.datas.forEach(label => {
+        (function(label, self) {
+          self.trigger('labelfield.create', label)
+        })(label, this)
+      })
+    }
   }
 
   getVal() {

@@ -12,13 +12,97 @@ collapsibleApply($('.js-menu'))
 
 
 
-let psv = ProdSpecView.of({ $el: $('.js-prodspecview') })
+
+
+function psvdataAdapter(data) {
+  return data.map(d => {
+    return {
+      id: d.id,
+      name: d.name || '',
+      labels: d.labelvalue || []
+    }
+  })
+}
+
+
+let psvdata = psvdataAdapter([{
+  "id": "4028812c57045f390157046a783a0009",
+  "name": "testname1",
+  "labelvalue": ["啊啊啊啊","事实上"]
+},{
+  "id": "4028812c57045f390157046a783c000c",
+  "name": "testname2",
+  "labelvalue": ["1213","圣斗士"]
+}])
+
+
+let tabledata = [{
+  "id":"4028812c57045f390157046a8806000f",
+  "standardProductLabelValue1":"啊啊啊啊",
+  "standardProductLabelValue2":"1213",
+  "standardProductLabelValue3":null,
+  "code":"123",
+  "barcode":"123",
+  "price":100
+},{
+  "id":"4028812c57045f390157046a8af40010",
+  "standardProductLabelValue1":"事实上",
+  "standardProductLabelValue2":"圣斗士",
+  "standardProductLabelValue3":null,
+  "code":"123",
+  "barcode":"2222",
+  "price":100
+}]
+
+
+let psv = ProdSpecView.of({ $el: $('.js-prodspecview'), datas: psvdata })
+
+let setTableDataHandle = function($body, cb) {
+  tabledata.forEach(data => {
+    let lb1 = data.standardProductLabelValue1
+    let lb2 = data.standardProductLabelValue2
+    let lb3 = data.standardProductLabelValue3
+
+    let $row = $body.find('tr').filter(function() {
+      let $this = $(this)
+      let out = false
+      return [lb1, lb2, lb3].filter(n => n).reduce((acc, curr) => {
+        return acc & !!$this.find(`input[value="${curr}"]`).length
+      }, true)
+    })
+
+
+    if(data.price) {
+      $row.find('td').eq(-2).find('input').val(data.price)
+    }
+
+    if(data.barcode) {
+      $row.find('td').eq(-3).find('input').val(data.barcode)
+    }
+
+    if(data.code) {
+      $row.find('td').eq(-4).find('input').val(data.code)
+      $row.find('td').eq(-4).find('span').text(data.code)
+    }
+
+  })
+  cb && cb()
+}
 
 psv.on('prodspecview.export', function(evt, data) {
   let ttv = new ThumbnailTableView({ $el: $('.js-thumbnailtableview'), data: data })
-
   ttv.render()
+  if(data.handle) {
+    data.handle(ttv.$body, function() {
+      setTableDataHandle = null
+    })
+  }
+}).trigger('prodspecview.export', {
+  data: psvdata,
+  handle: setTableDataHandle
 })
+
+
 
 
 let listViewData = [

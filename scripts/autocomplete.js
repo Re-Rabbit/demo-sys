@@ -2,7 +2,12 @@ import $ from 'jquery'
 
 class AutoComplete {
 
-  constructor({ $el, datas = [], init, tpl }) {
+  constructor({ $el,
+                datas = [],
+                init,
+                tpl,
+                renderHandle,
+                disableDirectionKey }) {
     this.$el   = $el
     this.datas = datas
     this.tpl   = tpl
@@ -11,6 +16,8 @@ class AutoComplete {
     this.cache = {}
     this.uuid  = 'autocomplete' + Date.now()
     this.state = 1 // 1. close 2.open
+    this.renderHandle = renderHandle
+    this.disableDirectionKey = disableDirectionKey
 
     this.init()
   }
@@ -42,23 +49,31 @@ class AutoComplete {
       on,
       trigger,
       setVal,
+      getVal,
       render,
       matchlist,
-      toggleState
+      toggleState,
+      changeHandle,
+      disableDirectionKey
     } = this
 
     setVal = setVal.bind(this)
+    getVal = getVal.bind(this)
     render = render.bind(this)
     matchlist = matchlist.bind(this)
     toggleState = toggleState.bind(this)
 
+    if(changeHandle)
+      changeHandle = changeHandle.bind(this)
+
+    let self = this
 
     // 重新渲染列表
     on('keyup.autocomplete.changed', '.autocomplete-field', function(evt) {
       let isDirectionKey = evt.which === 38 || evt.which === 40
       let val = $(this).val().trim()
 
-      if(isDirectionKey) {
+      if(!disableDirectionKey && isDirectionKey) {
 
         var $items = $list.find('.autocomplete-listitem')
         var len = $items.length
@@ -97,10 +112,11 @@ class AutoComplete {
     on('focusout', '.autocomplete-field', function(evt) {
       setTimeout(_ => {
         if(!matchlist($(this).val()).length) {
-          setVal(this.value)
+          setVal(getVal())
           render(datas)
         }
         toggleState(2)
+        trigger('autocomplete.focusout')
       }, 200)
     })
   }
@@ -122,14 +138,20 @@ class AutoComplete {
 
 
   setVal(data, isKeep) {
+    let rval
     if(data) {
+      rval = data.value
       this.value = data
-      this.$field.val(data.value)
       this.$list.find('.autocomplete-listitem').removeClass('active')
       this.$list.find(`.autocomplete-listitem[data-id="${data.id}"]`).addClass('active')
     } else {
-      this.$field.val(this.value.value)
+      rval = this.value.value
     }
+
+    if(!this.renderHandle)
+      this.$field.val(rval)
+    else
+      this.renderHandle(rval, this)
 
     if(!isKeep)
       this.toggleState(2)
@@ -141,17 +163,15 @@ class AutoComplete {
 
   matchlist(str) {
     if(!str) return this.datas
-    let regex = new RegExp(`${str}`)
+    let regex = new RegExp(`${str.toLowerCase()}`, 'i')
     return this.datas.filter(data => regex.test(data.value))
   }
 
   render(list) {
     let { $list, setVal, value } = this
     let tpl = this.tpl || AutoComplete.tpl
-    //let tpl = AutoComplete.tpl
 
     setVal = setVal.bind(this)
-
     $list.empty()
 
     if(!list.length) {
